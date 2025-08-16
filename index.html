@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redoublet.com - Bridge Reimagined</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            color: #00213A;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #00213A;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-family: 'Merriweather', serif;
+            font-weight: 700;
+        }
+
+        .logo-redoublet {
+            color: #fff;
+        }
+
+        .logo-com {
+            color: #ff6b6b;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ff6b6b;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover:after,
+        nav a.active:after {
+            width: 100%;
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        /* Landing Page Styles */
+        #home {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: flex-start;
+            gap: 60px;
+            min-height: calc(100vh - 160px);
+        }
+
+        .video-section, .coming-soon-section {
+            flex: 1;
+        }
+
+        .video-container {
+            background: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .video-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .coming-soon-section {
+            text-align: center;
+        }
+
+        .coming-soon-box {
+            background: #fff;
+            border-radius: 20px;
+            padding: 60px 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .coming-soon-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,107,107,0.05), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .coming-soon-title {
+            font-family: 'Merriweather', serif;
+            font-size: 48px;
+            color: #00213A;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .coming-soon-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+
+        .qr-placeholder {
+            width: 200px;
+            height: 200px;
+            background: #f0f4f8;
+            border-radius: 12px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px dashed #00213A;
+            animation: fadeInUp 1s ease 0.4s;
+            animation-fill-mode: both;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* About Page Styles */
+        #about {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .about-container {
+            background: #fff;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .about-title {
+            font-family: 'Merriweather', serif;
+            font-size: 48px;
+            color: #00213A;
+            margin-bottom: 20px;
+        }
+
+        .founders-section {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 50px;
+            align-items: center;
+        }
+
+        .founders-image {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .founders-image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .founders-text {
+            flex: 1;
+        }
+
+        .about-content {
+            font-size: 16px;
+            color: #444;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            background: #f0f4f8;
+            border-left: 4px solid #ff6b6b;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .contact-info h3 {
+            color: #00213A;
+            margin-bottom: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        .contact-info a {
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #00213A;
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: #00213A;
+            margin-bottom: 10px;
+        }
+
+        .feature-description {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #home {
+                flex-direction: column;
+                padding: 40px 20px;
+            }
+
+            .coming-soon-title {
+                font-size: 36px;
+            }
+
+            .founders-section {
+                flex-direction: column;
+            }
+
+            .about-container {
+                padding: 40px 30px;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-redoublet">REDOUBLET.</span><span class="logo-com">COM</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active" onclick="showPage('home')">Home</a></li>
+                    <li><a href="#" onclick="showPage('about')">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Landing Page -->
+        <section id="home">
+            <div class="video-section">
+                <div class="video-container">
+                    <h2 style="font-family: 'Merriweather', serif; font-size: 32px; margin-bottom: 20px; color: #00213A;">Experience Bridge Like Never Before</h2>
+                    <div class="video-wrapper" style="position: relative; width: 100%; padding-bottom: 177.78%; height: 0; overflow: hidden; border-radius: 12px;">
+                        <iframe 
+                            src="https://www.youtube.com/embed/JwYIzHIY7J8" 
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                            title="Redoublet.com App Features"
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <div class="coming-soon-section">
+                <div class="coming-soon-box">
+                    <h1 class="coming-soon-title">Coming Soon...</h1>
+                    <p class="coming-soon-subtitle">Download our app and join the bridge revolution!</p>
+                    <div class="qr-placeholder">
+                        <span style="color: #00213A; font-size: 14px;">QR Code</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Page -->
+        <section id="about">
+            <div class="about-container">
+                <div class="about-header">
+                    <h1 class="about-title">About Redoublet.com</h1>
+                </div>
+
+                <div class="founders-section">
+                    <div class="founders-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='400' viewBox='0 0 500 400'%3E%3Crect width='500' height='400' fill='%23f0f4f8'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Poppins' font-size='20' fill='%2300213A'%3EQuirinus %26 Christiaan Tersteeg%3C/text%3E%3C/svg%3E" alt="Quirinus and Christiaan Tersteeg">
+                    </div>
+                    <div class="founders-text">
+                        <p class="about-content">
+                            <strong>Redoublet.com was founded in 2023 by Quirinus (father) and Christiaan Tersteeg (son).</strong> Our ambition with Redoublet.com is to provide a user-friendly and fun alternative to the current online bridge offerings.
+                        </p>
+                        <p class="about-content">
+                            Our website offers unique features, including a variety of competitions and playing options. In just a few months, we expect to launch our app for both iOS and Android. Stay tuned!
+                        </p>
+                        <p class="about-content">
+                            If you have any feedback for us or would like to collaborate with us, don't hesitate to reach out.
+                        </p>
+                        <p class="about-content" style="font-weight: 600; color: #00213A; font-size: 18px; margin-top: 30px;">
+                            Enjoy the game!<br>
+                            Christiaan and Quirinus
+                        </p>
+                    </div>
+                </div>
+
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <p>We'd love to hear from you!</p>
+                    <p style="margin-top: 10px;">
+                        Contact: <a href="mailto:support@redoublet.com">support@redoublet.com</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function showPage(page) {
+            const homePage = document.getElementById('home');
+            const aboutPage = document.getElementById('about');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            if (page === 'home') {
+                homePage.style.display = 'flex';
+                aboutPage.style.display = 'none';
+                navLinks[0].classList.add('active');
+            } else if (page === 'about') {
+                homePage.style.display = 'none';
+                aboutPage.style.display = 'block';
+                navLinks[1].classList.add('active');
+            }
+        }
+
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+            });
+        });
+
+        // Add animation on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.15)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+    </script>
+</body>
+</html>

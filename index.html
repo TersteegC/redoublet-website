@@ -202,7 +202,7 @@
 
         /* About Page Styles */
         #about {
-            padding: 80px 20px;
+            padding: 40px 20px;
             max-width: 1200px;
             margin: 0 auto;
             display: none;
@@ -326,28 +326,115 @@
         @media (max-width: 768px) {
             #home {
                 flex-direction: column;
+                padding: 20px 15px;
+                gap: 30px;
+            }
+
+            .video-section, .coming-soon-section {
+                width: 100%;
+            }
+
+            .video-container {
+                padding: 20px;
+            }
+
+            .video-container h2 {
+                font-size: 24px !important;
+            }
+
+            .video-wrapper {
+                padding-bottom: 177.78% !important; /* Full height for mobile */
+            }
+
+            .coming-soon-box {
                 padding: 40px 20px;
+                min-height: auto;
             }
 
             .coming-soon-title {
-                font-size: 36px;
+                font-size: 32px;
+            }
+
+            .app-store-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .app-store-buttons a img {
+                width: 200px;
+                height: auto;
+            }
+
+            .qr-placeholder {
+                width: 150px;
+                height: 150px;
+            }
+
+            #about {
+                padding: 20px 15px;
             }
 
             .founders-section {
                 flex-direction: column;
+                gap: 20px;
             }
 
             .about-container {
-                padding: 40px 30px;
+                padding: 30px 20px;
+            }
+
+            .about-title {
+                font-size: 32px;
+            }
+
+            .about-content {
+                font-size: 14px;
             }
 
             .header-container {
-                flex-direction: column;
-                gap: 15px;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 20px;
             }
 
             nav ul {
-                gap: 20px;
+                gap: 15px;
+            }
+
+            nav a {
+                font-size: 14px;
+            }
+
+            .contact-info {
+                padding: 15px;
+            }
+
+            .contact-info a {
+                word-break: break-all;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .coming-soon-title {
+                font-size: 28px;
+            }
+
+            .about-title {
+                font-size: 28px;
+            }
+
+            .video-container h2 {
+                font-size: 20px !important;
+            }
+
+            .app-store-buttons a img {
+                width: 150px;
             }
         }
     </style>

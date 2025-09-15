@@ -548,6 +548,41 @@
             }
         }
 
+        // Modal functions
+        function openModal() {
+            document.getElementById('betaModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('betaModal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+            document.getElementById('betaForm').reset();
+        }
+
+        function submitBetaForm(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const platform = document.querySelector('input[name="platform"]:checked').value;
+            
+            // Here you would normally send this data to your server
+            console.log('Beta signup:', { email, platform });
+            
+            // Show success message
+            alert('Thank you for signing up for our beta program! We\'ll contact you soon.');
+            
+            closeModal();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('betaModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
         // Add smooth scroll behavior
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {

@@ -102,7 +102,7 @@
             min-height: calc(100vh - 160px);
         }
 
-        .video-section, .coming-soon-section {
+        .video-section, .beta-section {
             flex: 1;
         }
 
@@ -111,13 +111,6 @@
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transform: translateY(0);
-            transition: transform 0.3s ease;
-        }
-
-        .video-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
         }
 
         @keyframes pulse {
@@ -126,11 +119,11 @@
             100% { transform: scale(1); }
         }
 
-        .coming-soon-section {
+        .beta-section {
             text-align: center;
         }
 
-        .coming-soon-box {
+        .beta-box {
             background: #fff;
             border-radius: 20px;
             padding: 60px 40px;
@@ -143,7 +136,7 @@
             justify-content: center;
         }
 
-        .coming-soon-box::before {
+        .beta-box::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -159,12 +152,206 @@
             100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
-        .coming-soon-title {
+        .beta-title {
             font-family: 'Merriweather', serif;
-            font-size: 48px;
-            color: #0808D9
-            margin-bottom: 20px;
+            font-size: 32px;
+            color: #0808D9;
+            margin-bottom: 30px;
             animation: fadeInUp 1s ease;
+        }
+
+        .beta-button {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(255,107,107,0.3);
+        }
+
+        .beta-button:hover {
+            background: #ff5252;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255,107,107,0.4);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 90%;
+            animation: slideUp 0.3s ease;
+            position: relative;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-header {
+            margin-bottom: 30px;
+        }
+
+        .modal-header h2 {
+            font-family: 'Merriweather', serif;
+            color: #0808D9;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .modal-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #0808D9;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input[type="email"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group input[type="email"]:focus {
+            outline: none;
+            border-color: #0808D9;
+        }
+
+        .platform-selection {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .platform-option {
+            flex: 1;
+        }
+
+        .platform-option input[type="radio"] {
+            display: none;
+        }
+
+        .platform-option label {
+            display: block;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .platform-option input[type="radio"]:checked + label {
+            background: #0808D9;
+            color: white;
+            border-color: #0808D9;
+        }
+
+        .platform-option label:hover {
+            border-color: #0808D9;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .submit-btn, .cancel-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .submit-btn:hover {
+            background: #ff5252;
+        }
+
+        .cancel-btn {
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        .cancel-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: #999;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #333;
         }
 
         .coming-soon-subtitle {
@@ -330,7 +517,7 @@
                 gap: 30px;
             }
 
-            .video-section, .coming-soon-section {
+            .video-section, .beta-section {
                 width: 100%;
             }
 
@@ -346,12 +533,12 @@
                 padding-bottom: 177.78% !important; /* Full height for mobile */
             }
 
-            .coming-soon-box {
+            .beta-box {
                 padding: 40px 20px;
                 min-height: auto;
             }
 
-            .coming-soon-title {
+            .beta-title {
                 font-size: 32px;
             }
 
@@ -421,7 +608,7 @@
         }
 
         @media (max-width: 480px) {
-            .coming-soon-title {
+            .beta-title {
                 font-size: 28px;
             }
 
@@ -431,10 +618,6 @@
 
             .video-container h2 {
                 font-size: 20px !important;
-            }
-
-            .app-store-buttons a img {
-                width: 150px;
             }
         }
     </style>
@@ -473,23 +656,47 @@
                 </div>
             </div>
 
-            <div class="coming-soon-section">
-                <div class="coming-soon-box">
-                    <h1 class="coming-soon-title">Coming Soon</h1>
-                    <div class="app-store-buttons" style="display: flex; gap: 15px; justify-content: center; margin: 30px 0;">
-                        <a href="#" style="display: inline-block; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="Download on App Store" style="height: 50px;">
-                        </a>
-                        <a href="#" style="display: inline-block; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" style="height: 50px;">
-                        </a>
-                    </div>
-                    <div class="qr-placeholder">
-                        <span style="color: #0808D9; font-size: 14px;">QR Code</span>
-                    </div>
+            <div class="beta-section">
+                <div class="beta-box">
+                    <h1 class="beta-title">BETA testers wanted!</h1>
+                    <button class="beta-button" onclick="openModal()">Become a Tester</button>
                 </div>
             </div>
         </section>
+
+        <!-- Beta Tester Modal -->
+        <div id="betaModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+                <div class="modal-header">
+                    <h2>Join Our Beta Program</h2>
+                    <p>Be among the first to test Redoublet and help shape the future of bridge gaming!</p>
+                </div>
+                <form id="betaForm" onsubmit="submitBetaForm(event)">
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Select Platform *</label>
+                        <div class="platform-selection">
+                            <div class="platform-option">
+                                <input type="radio" id="ios" name="platform" value="ios" required>
+                                <label for="ios">iOS</label>
+                            </div>
+                            <div class="platform-option">
+                                <input type="radio" id="android" name="platform" value="android" required>
+                                <label for="android">Android</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="submit" class="submit-btn">Submit</button>
+                        <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
         <!-- About Page -->
         <section id="about">

@@ -97,10 +97,11 @@
             border: 2px solid #ffffff;
             border-radius: 8px;
             background-color: rgba(255, 255, 255, 0.95);
-            overflow: hidden;
+            overflow: visible; /* Changed to visible to show underline outside */
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             transition: all 0.3s ease;
             min-width: 160px; /* Ensure minimum width for equal buttons */
+            position: relative;
         }
 
         .language-toggle:hover {
@@ -111,7 +112,7 @@
         .lang-btn {
             flex: 1;
             width: 50%; /* Ensure equal width */
-            padding: 10px 20px;
+            padding: 10px 20px 13px 20px; /* Added extra bottom padding for underline */
             border: none;
             background: #FFFFFF;
             color: #0808D9;
@@ -126,10 +127,31 @@
             align-items: center;
             justify-content: center;
             gap: 2px;
+            border-radius: 6px;
         }
 
         .lang-btn:first-child {
             border-right: 1px solid rgba(8, 8, 217, 0.1);
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .lang-btn:last-child {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .lang-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: #ff6b6b;
+            transition: width 0.3s ease;
+            border-radius: 1px;
         }
 
         .lang-btn.active {
@@ -137,8 +159,17 @@
             color: #FFFFFF;
         }
 
+        .lang-btn.active::after {
+            width: calc(100% - 20px); /* Underline under the text, not full width */
+        }
+
         .lang-btn:hover:not(.active) {
             background: rgba(8, 8, 217, 0.05);
+        }
+
+        .lang-btn:hover:not(.active)::after {
+            width: calc(50% - 10px);
+            opacity: 0.5;
         }
 
         .lang-label {
@@ -693,9 +724,18 @@
             }
 
             .lang-btn {
-                padding: 5px 8px;
+                padding: 5px 8px 8px 8px; /* Extra bottom padding for underline on mobile */
                 font-size: 11px;
                 width: 50%; /* Ensure equal width on mobile too */
+            }
+
+            .lang-btn::after {
+                bottom: 2px;
+                height: 2px;
+            }
+
+            .lang-btn.active::after {
+                width: calc(100% - 16px); /* Adjusted for mobile padding */
             }
 
             .lang-label {
@@ -1103,4 +1143,3 @@
     </script>
 </body>
 </html>
-

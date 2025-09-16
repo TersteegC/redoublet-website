@@ -330,6 +330,11 @@
             background: #ff5252;
         }
 
+        .submit-btn:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+
         .cancel-btn {
             background: #f0f0f0;
             color: #666;
@@ -767,19 +772,46 @@
             document.getElementById('betaForm').reset();
         }
 
-        function submitBetaForm(event) {
+        // Updated submitBetaForm function with Netlify function integration
+        async function submitBetaForm(event) {
             event.preventDefault();
             
             const email = document.getElementById('email').value;
             const platform = document.querySelector('input[name="platform"]:checked').value;
             
-            // Here you would normally send this data to your server
-            console.log('Beta signup:', { email, platform });
+            // Show loading state
+            const submitBtn = event.target.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
             
-            // Show success message
-            alert('Thank you for signing up for our beta program! We\'ll contact you soon.');
-            
-            closeModal();
+            try {
+                const response = await fetch('/.netlify/functions/beta-signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, platform })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    // Success message
+                    alert('Thank you for signing up! Check your email for confirmation.');
+                    closeModal();
+                } else {
+                    // Error message
+                    alert(result.error || 'There was an error. Please try again or email us directly.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error connecting to our server. Please try again or email us directly at christiaan.tersteeg@redoublet.com');
+            } finally {
+                // Reset button state
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
         }
 
         // Close modal when clicking outside
@@ -809,5 +841,3 @@
     </script>
 </body>
 </html>
-
-

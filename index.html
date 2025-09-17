@@ -23,7 +23,7 @@
         /* Header Styles */
         header {
             background-color: #0808D9;
-            padding: 15px 0;
+            padding: 20px 0;
             position: fixed;
             width: 100%;
             top: 0;
@@ -41,29 +41,9 @@
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .logo-image {
-            height: 45px;
-            width: auto;
-            filter: brightness(0) invert(1);
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover .logo-image {
-            transform: scale(1.05);
-        }
-
-        .logo-text {
             font-size: 28px;
             font-family: 'Merriweather', serif;
             font-weight: 700;
-            display: flex;
         }
 
         .logo-redoublet {
@@ -709,14 +689,6 @@
             }
 
             .logo {
-                gap: 8px;
-            }
-
-            .logo-image {
-                height: 35px;
-            }
-
-            .logo-text {
                 font-size: 20px;
             }
 
@@ -790,14 +762,6 @@
             }
 
             .logo {
-                gap: 6px;
-            }
-
-            .logo-image {
-                height: 30px;
-            }
-
-            .logo-text {
                 font-size: 18px;
             }
 
@@ -826,27 +790,14 @@
                 font-weight: 600; /* Make the EN/NL text bold even when labels are hidden */
             }
         }
-
-        @media (max-width: 380px) {
-            .logo-text {
-                display: none; /* Hide text logo on very small screens */
-            }
-
-            .logo-image {
-                height: 35px; /* Slightly larger when it's the only logo element */
-            }
-        }
     </style>
 </head>
 <body>
     <header>
         <div class="header-container">
-            <a href="#" class="logo" onclick="showPage('home'); return false;">
-                <img src="app-icon 512 x 512 white.png" alt="Redoublet Logo" class="logo-image">
-                <div class="logo-text">
-                    <span class="logo-redoublet">REDOUBLET.</span><span class="logo-com">COM</span>
-                </div>
-            </a>
+            <div class="logo">
+                <span class="logo-redoublet">REDOUBLET.</span><span class="logo-com">COM</span>
+            </div>
             <div class="nav-wrapper">
                 <nav>
                     <ul>
@@ -1192,3 +1143,6 @@
     </script>
 </body>
 </html>
+
+
+

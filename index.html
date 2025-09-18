@@ -308,6 +308,42 @@
             box-shadow: 0 6px 20px rgba(255,107,107,0.4);
         }
 
+        /* Footer Styles */
+        .footer {
+            background-color: #f8f9fa;
+            padding: 30px 20px;
+            margin-top: 60px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #0808D9;
+            text-decoration: none;
+            font-size: 14px;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #ff6b6b;
+        }
+
+        .footer-copyright {
+            color: #666;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
         /* Modal Styles */
         .modal {
             display: none;
@@ -602,6 +638,109 @@
             color: #0808D9;
         }
 
+        /* Privacy Page Styles */
+        #privacy {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .privacy-container {
+            background: #fff;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .privacy-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .privacy-title {
+            font-family: 'Merriweather', serif;
+            font-size: 48px;
+            color: #0808D9;
+            margin-bottom: 15px;
+        }
+
+        .privacy-updated {
+            color: #666;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .privacy-section {
+            margin-bottom: 40px;
+        }
+
+        .privacy-section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            color: #0808D9;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .privacy-section h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            color: #0808D9;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .privacy-section p {
+            color: #444;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .privacy-section ul {
+            margin-left: 30px;
+            margin-bottom: 15px;
+            color: #444;
+            line-height: 1.8;
+        }
+
+        .privacy-section li {
+            margin-bottom: 8px;
+        }
+
+        .privacy-contact {
+            background: #f0f4f8;
+            border-left: 4px solid #ff6b6b;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 40px;
+        }
+
+        .privacy-contact h3 {
+            color: #0808D9;
+            margin-bottom: 15px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        .privacy-contact p {
+            margin-bottom: 10px;
+        }
+
+        .privacy-contact a {
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .privacy-contact a:hover {
+            color: #0808D9;
+        }
+
         /* Features Section */
         .features {
             display: grid;
@@ -699,7 +838,7 @@
                 height: 150px;
             }
 
-            #about {
+            #about, #privacy {
                 padding: 20px 15px;
             }
 
@@ -708,16 +847,20 @@
                 gap: 20px;
             }
 
-            .about-container {
+            .about-container, .privacy-container {
                 padding: 30px 20px;
             }
 
-            .about-title {
+            .about-title, .privacy-title {
                 font-size: 32px;
             }
 
             .about-content {
                 font-size: 14px;
+            }
+
+            .privacy-section h2 {
+                font-size: 20px;
             }
 
             .header-container {
@@ -781,6 +924,16 @@
                 font-size: 8px;
                 display: none; /* Hide labels on smaller screens to save space */
             }
+
+            .footer {
+                padding: 20px 15px;
+                margin-top: 40px;
+            }
+
+            .footer-links a {
+                display: block;
+                margin: 10px 0;
+            }
         }
 
         @media (max-width: 480px) {
@@ -788,7 +941,7 @@
                 font-size: 28px;
             }
 
-            .about-title {
+            .about-title, .privacy-title {
                 font-size: 28px;
             }
 
@@ -895,6 +1048,20 @@
             </div>
         </section>
 
+        <!-- Footer for Home Page -->
+        <div class="footer" id="home-footer">
+            <div class="footer-container">
+                <div class="footer-links">
+                    <a href="#" onclick="showPage('privacy')" data-i18n="footer-privacy">Privacy Policy</a>
+                    <a href="#" onclick="showPage('about')" data-i18n="footer-about">About Us</a>
+                    <a href="mailto:christiaan.tersteeg@redoublet.com" data-i18n="footer-contact">Contact</a>
+                </div>
+                <div class="footer-copyright">
+                    <p data-i18n="footer-copyright">© 2025 Redoublet.com - All rights reserved</p>
+                </div>
+            </div>
+        </div>
+
         <!-- Beta Tester Modal -->
         <div id="betaModal" class="modal">
             <div class="modal-content">
@@ -965,6 +1132,174 @@
                 </div>
             </div>
         </section>
+
+        <!-- Privacy Page -->
+        <section id="privacy">
+            <div class="privacy-container">
+                <div class="privacy-header">
+                    <h1 class="privacy-title" data-i18n="privacy-title">Privacy Policy</h1>
+                    <p class="privacy-updated" data-i18n="privacy-updated">Last updated: January 2025</p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2 data-i18n="privacy-intro-title">1. Introduction</h2>
+                    <p data-i18n="privacy-intro-text">
+                        Redoublet.com ("we", "our", or "us") respects your privacy and is committed to protecting your personal data. This privacy policy explains how we collect, use, and protect your information when you use our website and mobile application.
+                    </p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2 data-i18n="privacy-controller-title">2. Data Controller</h2>
+                    <p data-i18n="privacy-controller-text">
+                        The data controller responsible for your personal data is Redoublet.com, operated by Quirinus and Christiaan Tersteeg. You can contact us at:
+                    </p>
+                    <ul>
+                        <li>Email: christiaan.tersteeg@redoublet.com</li>
+                        <li>Email: quirinus.tersteeg@redoublet.com</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-section">
+                    <h2 data-i18n="privacy-data-title">3. Data We Collect</h2>
+                    <p data-i18n="privacy-data-intro">We may collect and process the following personal data:</p>
+                    
+                    <h3 data-i18n="privacy-data-beta-title">Beta Testing Program:</h3>
+                    <ul data-i18n="privacy-data-beta-list">
+                        <li>Email address</li>
+                        <li>Platform preference (iOS or Android)</li>
+                        <li>Feedback and communications you send to us</li>
+                    </ul>
+
+                    <h3 data-i18n="privacy-data-app-title">When Using Our App:</h3>
+                    <ul data-i18n="privacy-data-app-list">
+                        <li>Game statistics and bridge hands played</li>
+                        <li>App usage data and preferences</li>
+                        <li>Device information (device type, operating system)</li>
+                        <li>Photos of bridge cards (processed locally for card detection, not stored on our servers)</li>
+                        <li>Camera permissions (only when you actively use the card scanning feature)</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-section">
+                    <h2 data-i18n="privacy-camera-title">4. Camera Usage and Photo Processing</h2>
+                    <p data-i18n="privacy-camera-text">
+                        Our app uses your device's camera to scan and detect bridge cards. Important information about this feature:
+                    </p>
+                    <ul data-i18n="privacy-camera-list">
+                        <li>Camera access is only requested when you choose to use the card scanning feature</li>
+                        <li>Photos are processed locally on your device for card detection</li>
+                        <li>Images are not uploaded to our servers or stored permanently</li>
+                        <li>Card detection data is used solely to analyze your bridge game</li>
+                        <li>You can revoke camera permissions at any time through your device settings</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-section">
+                    <h2 data-i18n="privacy-legal-title">5. Legal Basis for Processing</h2>
+                    <p data-i18n="privacy-legal-text">
+                        We process your personal data based on:
+                    </p>
+                    <ul data-i18n="privacy-legal-list">
+                        <li>Your consent (for beta testing and marketing communications)</li>
+                        <li>Legitimate interests (to improve our services and user experience)</li>
+                        <li>Contract performance (to provide our services to you)</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-section">
+                    <h2 data-i18n="privacy-use-title">6. How We Use Your Data</h2>
+                    <p data-i18n="privacy-use-text">We use your personal data to:</p>
+                    <ul data-i18n="privacy-use-list">
+                        <li>Manage beta testing participation</li>
+                        <li>Send important updates about our app</li>
+                        <li>Improve our services and user experience</li>
+                        <li>Respond to your inquiries and provide support</li>
+                        <li>Analyze app usage to enhance features</li>
+                        <li>Comply with legal obligations</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-section">
+                    <h2 data-i18n="privacy-sharing-title">7. Data Sharing</h2>
+                    <p data-i18n="privacy-sharing-text">
+                        We do not sell your personal data. We may share your data with:
+                    </p>
+                    <ul data-i18n="privacy-sharing-list">
+                        <li>Service providers who assist in our operations (hosting, email services)</li>
+                        <li>Beta testing platforms (TestFlight for iOS, Google Play Console for Android)</li>
+                        <li>Legal authorities when required by law</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-section">
+                    <h2 data-i18n="privacy-retention-title">8. Data Retention</h2>
+                    <p data-i18n="privacy-retention-text">
+                        We retain your personal data only as long as necessary for the purposes described in this policy. Beta tester information is kept during the testing period and for a reasonable time after launch. You can request deletion of your data at any time.
+                    </p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2 data-i18n="privacy-rights-title">9. Your Rights (GDPR)</h2>
+                    <p data-i18n="privacy-rights-text">Under the General Data Protection Regulation (GDPR), you have the following rights:</p>
+                    <ul data-i18n="privacy-rights-list">
+                        <li><strong>Access:</strong> Request a copy of your personal data</li>
+                        <li><strong>Rectification:</strong> Request correction of inaccurate data</li>
+                        <li><strong>Erasure:</strong> Request deletion of your personal data</li>
+                        <li><strong>Restriction:</strong> Request limited processing of your data</li>
+                        <li><strong>Portability:</strong> Receive your data in a portable format</li>
+                        <li><strong>Object:</strong> Object to certain types of processing</li>
+                        <li><strong>Withdraw consent:</strong> Withdraw consent at any time</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-section">
+                    <h2 data-i18n="privacy-security-title">10. Data Security</h2>
+                    <p data-i18n="privacy-security-text">
+                        We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction. However, no internet transmission is completely secure, and we cannot guarantee absolute security.
+                    </p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2 data-i18n="privacy-cookies-title">11. Cookies</h2>
+                    <p data-i18n="privacy-cookies-text">
+                        Our website uses essential cookies to ensure proper functionality. We also use analytics cookies to understand how visitors interact with our website. You can control cookie preferences through your browser settings.
+                    </p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2 data-i18n="privacy-children-title">12. Children's Privacy</h2>
+                    <p data-i18n="privacy-children-text">
+                        Our services are not directed to children under 16. We do not knowingly collect personal data from children under 16. If you believe we have collected data from a child under 16, please contact us immediately.
+                    </p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2 data-i18n="privacy-changes-title">13. Changes to This Policy</h2>
+                    <p data-i18n="privacy-changes-text">
+                        We may update this privacy policy from time to time. We will notify you of any significant changes by posting the new policy on this page and updating the "Last updated" date.
+                    </p>
+                </div>
+
+                <div class="privacy-section">
+                    <h2 data-i18n="privacy-complaints-title">14. Complaints</h2>
+                    <p data-i18n="privacy-complaints-text">
+                        If you have concerns about how we handle your personal data, you have the right to lodge a complaint with the Dutch Data Protection Authority (Autoriteit Persoonsgegevens) or your local supervisory authority.
+                    </p>
+                </div>
+
+                <div class="privacy-contact">
+                    <h3 data-i18n="privacy-contact-title">Contact Us</h3>
+                    <p data-i18n="privacy-contact-text">
+                        If you have any questions about this privacy policy or our data practices, please contact us:
+                    </p>
+                    <p>
+                        <strong>Email:</strong><br>
+                        <a href="mailto:christiaan.tersteeg@redoublet.com">christiaan.tersteeg@redoublet.com</a><br>
+                        <a href="mailto:quirinus.tersteeg@redoublet.com">quirinus.tersteeg@redoublet.com</a>
+                    </p>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script>
@@ -973,6 +1308,7 @@
             en: {
                 'nav-home': 'Home',
                 'nav-about': 'About Us',
+                'nav-privacy': 'Privacy',
                 'video-title': 'Improve your bridge game',
                 'beta-title': 'BETA testers wanted!',
                 'beta-button': 'Become a Tester',
@@ -994,11 +1330,51 @@
                 'success-message': 'Thank you for signing up! Check your email for confirmation.',
                 'error-message': 'There was an error connecting to our server. Please try again or email us directly at christiaan.tersteeg@redoublet.com',
                 'lang-english': 'English',
-                'lang-dutch': 'Nederlands'
+                'lang-dutch': 'Nederlands',
+                'footer-privacy': 'Privacy Policy',
+                'footer-about': 'About Us',
+                'footer-contact': 'Contact',
+                'footer-copyright': '© 2025 Redoublet.com - All rights reserved',
+                // Privacy page translations
+                'privacy-title': 'Privacy Policy',
+                'privacy-updated': 'Last updated: January 2025',
+                'privacy-intro-title': '1. Introduction',
+                'privacy-intro-text': 'Redoublet.com ("we", "our", or "us") respects your privacy and is committed to protecting your personal data. This privacy policy explains how we collect, use, and protect your information when you use our website and mobile application.',
+                'privacy-controller-title': '2. Data Controller',
+                'privacy-controller-text': 'The data controller responsible for your personal data is Redoublet.com, operated by Quirinus and Christiaan Tersteeg. You can contact us at:',
+                'privacy-data-title': '3. Data We Collect',
+                'privacy-data-intro': 'We may collect and process the following personal data:',
+                'privacy-data-beta-title': 'Beta Testing Program:',
+                'privacy-data-app-title': 'When Using Our App:',
+                'privacy-camera-title': '4. Camera Usage and Photo Processing',
+                'privacy-camera-text': 'Our app uses your device\'s camera to scan and detect bridge cards. Important information about this feature:',
+                'privacy-legal-title': '5. Legal Basis for Processing',
+                'privacy-legal-text': 'We process your personal data based on:',
+                'privacy-use-title': '6. How We Use Your Data',
+                'privacy-use-text': 'We use your personal data to:',
+                'privacy-sharing-title': '7. Data Sharing',
+                'privacy-sharing-text': 'We do not sell your personal data. We may share your data with:',
+                'privacy-retention-title': '8. Data Retention',
+                'privacy-retention-text': 'We retain your personal data only as long as necessary for the purposes described in this policy. Beta tester information is kept during the testing period and for a reasonable time after launch. You can request deletion of your data at any time.',
+                'privacy-rights-title': '9. Your Rights (GDPR)',
+                'privacy-rights-text': 'Under the General Data Protection Regulation (GDPR), you have the following rights:',
+                'privacy-security-title': '10. Data Security',
+                'privacy-security-text': 'We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction. However, no internet transmission is completely secure, and we cannot guarantee absolute security.',
+                'privacy-cookies-title': '11. Cookies',
+                'privacy-cookies-text': 'Our website uses essential cookies to ensure proper functionality. We also use analytics cookies to understand how visitors interact with our website. You can control cookie preferences through your browser settings.',
+                'privacy-children-title': '12. Children\'s Privacy',
+                'privacy-children-text': 'Our services are not directed to children under 16. We do not knowingly collect personal data from children under 16. If you believe we have collected data from a child under 16, please contact us immediately.',
+                'privacy-changes-title': '13. Changes to This Policy',
+                'privacy-changes-text': 'We may update this privacy policy from time to time. We will notify you of any significant changes by posting the new policy on this page and updating the "Last updated" date.',
+                'privacy-complaints-title': '14. Complaints',
+                'privacy-complaints-text': 'If you have concerns about how we handle your personal data, you have the right to lodge a complaint with the Dutch Data Protection Authority (Autoriteit Persoonsgegevens) or your local supervisory authority.',
+                'privacy-contact-title': 'Contact Us',
+                'privacy-contact-text': 'If you have any questions about this privacy policy or our data practices, please contact us:'
             },
             nl: {
                 'nav-home': 'Home',
                 'nav-about': 'Over Ons',
+                'nav-privacy': 'Privacy',
                 'video-title': 'Verbeter je bridge spel',
                 'beta-title': 'BETA testers gezocht!',
                 'beta-button': 'Word een Tester',
@@ -1020,7 +1396,46 @@
                 'success-message': 'Bedankt voor je aanmelding! Controleer je e-mail voor bevestiging.',
                 'error-message': 'Er is een fout opgetreden bij het verbinden met onze server. Probeer het opnieuw of e-mail ons direct op christiaan.tersteeg@redoublet.com',
                 'lang-english': 'English',
-                'lang-dutch': 'Nederlands'
+                'lang-dutch': 'Nederlands',
+                'footer-privacy': 'Privacybeleid',
+                'footer-about': 'Over Ons',
+                'footer-contact': 'Contact',
+                'footer-copyright': '© 2025 Redoublet.com - Alle rechten voorbehouden',
+                // Privacy page translations Dutch
+                'privacy-title': 'Privacybeleid',
+                'privacy-updated': 'Laatst bijgewerkt: januari 2025',
+                'privacy-intro-title': '1. Inleiding',
+                'privacy-intro-text': 'Redoublet.com ("wij", "ons", of "onze") respecteert uw privacy en is toegewijd aan het beschermen van uw persoonsgegevens. Dit privacybeleid legt uit hoe wij uw informatie verzamelen, gebruiken en beschermen wanneer u onze website en mobiele applicatie gebruikt.',
+                'privacy-controller-title': '2. Verwerkingsverantwoordelijke',
+                'privacy-controller-text': 'De verwerkingsverantwoordelijke voor uw persoonsgegevens is Redoublet.com, geëxploiteerd door Quirinus en Christiaan Tersteeg. U kunt contact met ons opnemen via:',
+                'privacy-data-title': '3. Gegevens die wij verzamelen',
+                'privacy-data-intro': 'Wij kunnen de volgende persoonsgegevens verzamelen en verwerken:',
+                'privacy-data-beta-title': 'Beta Testprogramma:',
+                'privacy-data-app-title': 'Bij gebruik van onze App:',
+                'privacy-camera-title': '4. Cameragebruik en Fotoverwerking',
+                'privacy-camera-text': 'Onze app gebruikt de camera van uw apparaat om bridgekaarten te scannen en detecteren. Belangrijke informatie over deze functie:',
+                'privacy-legal-title': '5. Rechtmatige grondslag voor verwerking',
+                'privacy-legal-text': 'Wij verwerken uw persoonsgegevens op basis van:',
+                'privacy-use-title': '6. Hoe wij uw gegevens gebruiken',
+                'privacy-use-text': 'Wij gebruiken uw persoonsgegevens om:',
+                'privacy-sharing-title': '7. Gegevens delen',
+                'privacy-sharing-text': 'Wij verkopen uw persoonsgegevens niet. Wij kunnen uw gegevens delen met:',
+                'privacy-retention-title': '8. Gegevensretentie',
+                'privacy-retention-text': 'Wij bewaren uw persoonsgegevens alleen zo lang als noodzakelijk voor de doeleinden beschreven in dit beleid. Beta tester informatie wordt bewaard tijdens de testperiode en voor een redelijke tijd na de lancering. U kunt te allen tijde verwijdering van uw gegevens aanvragen.',
+                'privacy-rights-title': '9. Uw rechten (AVG)',
+                'privacy-rights-text': 'Onder de Algemene Verordening Gegevensbescherming (AVG) heeft u de volgende rechten:',
+                'privacy-security-title': '10. Gegevensbeveiliging',
+                'privacy-security-text': 'Wij implementeren passende technische en organisatorische maatregelen om uw persoonsgegevens te beschermen tegen ongeautoriseerde toegang, wijziging, openbaarmaking of vernietiging. Echter, geen internettransmissie is volledig veilig, en wij kunnen geen absolute veiligheid garanderen.',
+                'privacy-cookies-title': '11. Cookies',
+                'privacy-cookies-text': 'Onze website gebruikt essentiële cookies om de juiste functionaliteit te waarborgen. Wij gebruiken ook analytische cookies om te begrijpen hoe bezoekers met onze website omgaan. U kunt cookievoorkeuren beheren via uw browserinstellingen.',
+                'privacy-children-title': '12. Privacy van kinderen',
+                'privacy-children-text': 'Onze diensten zijn niet gericht op kinderen onder de 16 jaar. Wij verzamelen niet bewust persoonsgegevens van kinderen onder de 16 jaar. Als u denkt dat wij gegevens van een kind onder de 16 jaar hebben verzameld, neem dan onmiddellijk contact met ons op.',
+                'privacy-changes-title': '13. Wijzigingen in dit beleid',
+                'privacy-changes-text': 'Wij kunnen dit privacybeleid van tijd tot tijd bijwerken. Wij zullen u op de hoogte stellen van belangrijke wijzigingen door het nieuwe beleid op deze pagina te plaatsen en de datum "Laatst bijgewerkt" aan te passen.',
+                'privacy-complaints-title': '14. Klachten',
+                'privacy-complaints-text': 'Als u zorgen heeft over hoe wij uw persoonsgegevens behandelen, heeft u het recht om een klacht in te dienen bij de Autoriteit Persoonsgegevens of uw lokale toezichthoudende autoriteit.',
+                'privacy-contact-title': 'Contact',
+                'privacy-contact-text': 'Als u vragen heeft over dit privacybeleid of onze gegevenspraktijken, neem dan contact met ons op:'
             }
         };
 
@@ -1067,128 +1482,82 @@
             elements.forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 if (translations[currentLanguage][key]) {
+                    // Handle special cases for lists
+                    if (element.tagName === 'UL' && (
+                        key === 'privacy-data-beta-list' || 
+                        key === 'privacy-data-app-list' || 
+                        key === 'privacy-legal-list' || 
+                        key === 'privacy-use-list' || 
+                        key === 'privacy-sharing-list' ||
+                        key === 'privacy-rights-list'
+                    )) {
+                        // For these lists, we'll keep the existing structure
+                        return;
+                    }
                     element.textContent = translations[currentLanguage][key];
                 }
             });
-            
-            // Update language toggle buttons
-            const langButtons = document.querySelectorAll('.lang-btn');
-            langButtons.forEach(btn => {
-                btn.classList.remove('active');
-                const btnLang = btn.querySelector('span:first-child').textContent.toLowerCase();
-                if ((currentLanguage === 'en' && btnLang === 'en') ||
-                    (currentLanguage === 'nl' && btnLang === 'nl')) {
-                    btn.classList.add('active');
-                }
-            });
-            
-            // Update email placeholder
-            const emailInput = document.getElementById('email');
-            if (emailInput) {
-                emailInput.placeholder = currentLanguage === 'nl' ? 'jouw@email.com' : 'your@email.com';
-            }
-        }
 
-        function showPage(page) {
-            const homePage = document.getElementById('home');
-            const aboutPage = document.getElementById('about');
-            const navLinks = document.querySelectorAll('nav a');
-            
-            navLinks.forEach(link => link.classList.remove('active'));
-            
-            if (page === 'home') {
-                homePage.style.display = 'flex';
-                aboutPage.style.display = 'none';
-                navLinks[0].classList.add('active');
-            } else if (page === 'about') {
-                homePage.style.display = 'none';
-                aboutPage.style.display = 'block';
-                navLinks[1].classList.add('active');
-            }
-        }
-
-        // Modal functions
-        function openModal() {
-            document.getElementById('betaModal').classList.add('show');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            document.getElementById('betaModal').classList.remove('show');
-            document.body.style.overflow = 'auto';
-            document.getElementById('betaForm').reset();
-        }
-
-        // Updated submitBetaForm function with Netlify function integration
-        async function submitBetaForm(event) {
-            event.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const platform = document.querySelector('input[name="platform"]:checked').value;
-            
-            // Show loading state
-            const submitBtn = event.target.querySelector('.submit-btn');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = translations[currentLanguage]['submit-sending'];
-            submitBtn.disabled = true;
-            
-            try {
-                // Use the full Netlify URL to ensure it works from custom domain
-                const response = await fetch('https://thunderous-twilight-ec953b.netlify.app/.netlify/functions/beta-signup', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email, platform })
-                });
-                
-                const result = await response.json();
-                
-                if (response.ok) {
-                    // Success message
-                    alert(translations[currentLanguage]['success-message']);
-                    closeModal();
+            // Special handling for privacy rights list (because of bold text)
+            if (document.querySelector('[data-i18n="privacy-rights-list"]')) {
+                const rightsList = document.querySelector('[data-i18n="privacy-rights-list"]');
+                if (currentLanguage === 'nl') {
+                    rightsList.innerHTML = `
+                        <li><strong>Inzage:</strong> Vraag een kopie van uw persoonsgegevens op</li>
+                        <li><strong>Rectificatie:</strong> Vraag correctie van onjuiste gegevens</li>
+                        <li><strong>Verwijdering:</strong> Vraag verwijdering van uw persoonsgegevens</li>
+                        <li><strong>Beperking:</strong> Vraag beperkte verwerking van uw gegevens</li>
+                        <li><strong>Overdraagbaarheid:</strong> Ontvang uw gegevens in een overdraagbaar formaat</li>
+                        <li><strong>Bezwaar:</strong> Maak bezwaar tegen bepaalde soorten verwerking</li>
+                        <li><strong>Toestemming intrekken:</strong> Trek toestemming op elk moment in</li>
+                    `;
                 } else {
-                    // Error message
-                    alert(result.error || translations[currentLanguage]['error-message']);
+                    rightsList.innerHTML = `
+                        <li><strong>Access:</strong> Request a copy of your personal data</li>
+                        <li><strong>Rectification:</strong> Request correction of inaccurate data</li>
+                        <li><strong>Erasure:</strong> Request deletion of your personal data</li>
+                        <li><strong>Restriction:</strong> Request limited processing of your data</li>
+                        <li><strong>Portability:</strong> Receive your data in a portable format</li>
+                        <li><strong>Object:</strong> Object to certain types of processing</li>
+                        <li><strong>Withdraw consent:</strong> Withdraw consent at any time</li>
+                    `;
                 }
-            } catch (error) {
-                console.error('Error:', error);
-                alert(translations[currentLanguage]['error-message']);
-            } finally {
-                // Reset button state
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
             }
-        }
 
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('betaModal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
+            // Handle other lists
+            const dataLists = {
+                'privacy-data-beta-list': {
+                    en: ['Email address', 'Platform preference (iOS or Android)', 'Feedback and communications you send to us'],
+                    nl: ['E-mailadres', 'Platformvoorkeur (iOS of Android)', 'Feedback en communicatie die u ons stuurt']
+                },
+                'privacy-data-app-list': {
+                    en: ['Game statistics and bridge hands played', 'App usage data and preferences', 'Device information (device type, operating system)', 'Photos of bridge cards (processed locally for card detection, not stored on our servers)', 'Camera permissions (only when you actively use the card scanning feature)'],
+                    nl: ['Spelstatistieken en gespeelde bridge handen', 'App-gebruiksgegevens en voorkeuren', 'Apparaatinformatie (apparaattype, besturingssysteem)', 'Foto\'s van bridgekaarten (lokaal verwerkt voor kaartdetectie, niet opgeslagen op onze servers)', 'Cameratoestemmingen (alleen wanneer u actief de kaartscanfunctie gebruikt)']
+                },
+                'privacy-camera-list': {
+                    en: ['Camera access is only requested when you choose to use the card scanning feature', 'Photos are processed locally on your device for card detection', 'Images are not uploaded to our servers or stored permanently', 'Card detection data is used solely to analyze your bridge game', 'You can revoke camera permissions at any time through your device settings'],
+                    nl: ['Cameratoegang wordt alleen gevraagd wanneer u ervoor kiest de kaartscanfunctie te gebruiken', 'Foto\'s worden lokaal op uw apparaat verwerkt voor kaartdetectie', 'Afbeeldingen worden niet geüpload naar onze servers of permanent opgeslagen', 'Kaartdetectiegegevens worden uitsluitend gebruikt om uw bridgespel te analyseren', 'U kunt cameratoestemmingen op elk moment intrekken via uw apparaatinstellingen']
+                },
+                'privacy-legal-list': {
+                    en: ['Your consent (for beta testing and marketing communications)', 'Legitimate interests (to improve our services and user experience)', 'Contract performance (to provide our services to you)'],
+                    nl: ['Uw toestemming (voor beta-testen en marketingcommunicatie)', 'Gerechtvaardigd belang (om onze diensten en gebruikerservaring te verbeteren)', 'Uitvoering van de overeenkomst (om onze diensten aan u te leveren)']
+                },
+                'privacy-use-list': {
+                    en: ['Manage beta testing participation', 'Send important updates about our app', 'Improve our services and user experience', 'Respond to your inquiries and provide support', 'Analyze app usage to enhance features', 'Comply with legal obligations'],
+                    nl: ['Beta-test deelname beheren', 'Belangrijke updates over onze app versturen', 'Onze diensten en gebruikerservaring verbeteren', 'Reageren op uw vragen en ondersteuning bieden', 'App-gebruik analyseren om functies te verbeteren', 'Voldoen aan wettelijke verplichtingen']
+                },
+                'privacy-sharing-list': {
+                    en: ['Service providers who assist in our operations (hosting, email services)', 'Beta testing platforms (TestFlight for iOS, Google Play Console for Android)', 'Legal authorities when required by law'],
+                    nl: ['Dienstverleners die ons helpen bij onze activiteiten (hosting, e-maildiensten)', 'Beta-testplatforms (TestFlight voor iOS, Google Play Console voor Android)', 'Juridische autoriteiten wanneer vereist door de wet']
+                }
+            };
 
-        // Add smooth scroll behavior
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
+            // Update lists with proper translations
+            Object.keys(dataLists).forEach(listKey => {
+                const listElement = document.querySelector(`[data-i18n="${listKey}"]`);
+                if (listElement) {
+                    listElement.innerHTML = dataLists[listKey][currentLanguage]
+                        .map(item => `<li>${item}</li>`)
+                        .join('');
+                }
             });
-        });
-
-        // Add animation on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.15)';
-            } else {
-                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
-            }
-        });
-
-        // Initialize language when page loads
-        document.addEventListener('DOMContentLoaded', initializeLanguage);
-    </script>
-</body>
-</html>

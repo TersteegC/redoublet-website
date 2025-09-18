@@ -634,6 +634,15 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            /* Hide logo image on mobile, show only text */
+            .logo-image {
+                display: none; /* Hide pictogram on mobile */
+            }
+            
+            .logo {
+                gap: 0; /* Remove gap since image is hidden */
+            }
+
             #home {
                 flex-direction: column;
                 padding: 20px 15px;
@@ -706,14 +715,6 @@
                 justify-content: space-between;
                 align-items: center;
                 padding: 0 15px;
-            }
-
-            .logo {
-                gap: 8px;
-            }
-
-            .logo-image {
-                height: 35px;
             }
 
             .logo-text {
@@ -789,14 +790,6 @@
                 padding: 0 10px;
             }
 
-            .logo {
-                gap: 6px;
-            }
-
-            .logo-image {
-                height: 30px;
-            }
-
             .logo-text {
                 font-size: 18px;
             }
@@ -828,12 +821,9 @@
         }
 
         @media (max-width: 380px) {
+            /* Keep logo text visible on all screen sizes */
             .logo-text {
-                display: none; /* Hide text logo on very small screens */
-            }
-
-            .logo-image {
-                height: 35px; /* Slightly larger when it's the only logo element */
+                font-size: 18px; /* Slightly smaller on very small screens */
             }
         }
     </style>

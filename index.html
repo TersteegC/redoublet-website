@@ -1217,7 +1217,7 @@
                         <label for="email" data-i18n="modal-email">Email Address *</label>
                         <input type="email" id="email" name="email" required placeholder="your@email.com">
                         <p style="font-size: 12px; color: #666; margin-top: 8px; line-height: 1.4;" data-i18n="modal-email-note">
-                            Please use the same email address that you use to login to the Play Store (Android) or App Store (iOS).
+                            Please use the same email address that you use to login to the Play Store (Android) or App Store (iOS), so you can access the beta app.
                         </p>
                     </div>
                     <div class="form-group">
@@ -1529,7 +1529,7 @@
                 'modal-title': 'Schrijf je in als Tester',
                 'modal-subtitle': 'Word een van de eersten om Redoublet.com te testen',
                 'modal-email': 'E-mailadres *',
-                'modal-email-note': 'Gebruik hetzelfde e-mailadres dat u gebruikt om in te loggen bij de Play Store (Android) of App Store (iOS)',
+                'modal-email-note': 'Gebruik hetzelfde e-mailadres dat u gebruikt om in te loggen bij de Play Store (Android) of App Store (iOS), zodat u toegang heeft tot de beta-app.',
                 'modal-platform': 'Selecteer Platform *',
                 'modal-submit': 'Verstuur',
                 'modal-cancel': 'Annuleer',
@@ -1710,3 +1710,50 @@
                         .join('');
                 }
             });
+
+            // Update language toggle buttons
+            const langButtons = document.querySelectorAll('.lang-btn');
+            langButtons.forEach(btn => {
+                btn.classList.remove('active');
+                const btnLang = btn.querySelector('span:first-child').textContent.toLowerCase();
+                if ((currentLanguage === 'en' && btnLang === 'en') ||
+                    (currentLanguage === 'nl' && btnLang === 'nl')) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update email placeholder
+            const emailInput = document.getElementById('email');
+            if (emailInput) {
+                emailInput.placeholder = currentLanguage === 'nl' ? 'jouw@email.com' : 'your@email.com';
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('betaModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+            });
+        });
+
+        // Add animation on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.15)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Initialize language when page loads
+        document.addEventListener('DOMContentLoaded', initializeLanguage);
+    </script>

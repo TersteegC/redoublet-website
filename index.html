@@ -39,16 +39,44 @@
                     homePage.style.display = 'flex';
                     if (homeFooter) homeFooter.style.display = 'block';
                     if (navLinks[0]) navLinks[0].classList.add('active');
+                    window.location.hash = '';
                 } else if (page === 'about' && aboutPage) {
                     aboutPage.style.display = 'block';
                     if (navLinks[1]) navLinks[1].classList.add('active');
+                    window.location.hash = 'about';
                 } else if (page === 'privacy' && privacyPage) {
                     privacyPage.style.display = 'block';
+                    window.location.hash = 'privacy';
                 }
                 
                 window.scrollTo(0, 0);
             }, 0);
         }
+        
+        // Handle hash changes (back/forward navigation and direct URL access)
+        function handleHashChange() {
+            const hash = window.location.hash.slice(1); // Remove the # symbol
+            
+            switch(hash) {
+                case 'about':
+                    showPage('about');
+                    break;
+                case 'privacy':
+                    showPage('privacy');
+                    break;
+                default:
+                    showPage('home');
+                    break;
+            }
+        }
+        
+        // Listen for hash changes
+        window.addEventListener('hashchange', handleHashChange);
+        
+        // Check hash on initial load
+        window.addEventListener('DOMContentLoaded', function() {
+            setTimeout(handleHashChange, 100); // Small delay to ensure DOM is ready
+        });
         
         function openModal() {
             setTimeout(function() {

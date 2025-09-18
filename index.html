@@ -15,6 +15,71 @@
     <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    
+    <script>
+        // Define all functions in the head before body loads
+        function showPage(page) {
+            // Use setTimeout to ensure DOM is ready
+            setTimeout(function() {
+                const homePage = document.getElementById('home');
+                const aboutPage = document.getElementById('about');
+                const privacyPage = document.getElementById('privacy');
+                const homeFooter = document.getElementById('home-footer');
+                const navLinks = document.querySelectorAll('nav a');
+                
+                navLinks.forEach(link => link.classList.remove('active'));
+                
+                // Hide all pages first
+                if (homePage) homePage.style.display = 'none';
+                if (aboutPage) aboutPage.style.display = 'none';
+                if (privacyPage) privacyPage.style.display = 'none';
+                if (homeFooter) homeFooter.style.display = 'none';
+                
+                if (page === 'home' && homePage) {
+                    homePage.style.display = 'flex';
+                    if (homeFooter) homeFooter.style.display = 'block';
+                    if (navLinks[0]) navLinks[0].classList.add('active');
+                } else if (page === 'about' && aboutPage) {
+                    aboutPage.style.display = 'block';
+                    if (navLinks[1]) navLinks[1].classList.add('active');
+                } else if (page === 'privacy' && privacyPage) {
+                    privacyPage.style.display = 'block';
+                }
+                
+                window.scrollTo(0, 0);
+            }, 0);
+        }
+        
+        function openModal() {
+            setTimeout(function() {
+                const modal = document.getElementById('betaModal');
+                if (modal) {
+                    modal.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                }
+            }, 0);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('betaModal');
+            if (modal) {
+                modal.classList.remove('show');
+                document.body.style.overflow = 'auto';
+                const form = document.getElementById('betaForm');
+                if (form) form.reset();
+            }
+        }
+        
+        function changeLanguage(lang) {
+            if (typeof window.currentLanguage !== 'undefined' && lang === window.currentLanguage) return;
+            
+            window.currentLanguage = lang;
+            localStorage.setItem('preferredLanguage', lang);
+            if (typeof updateLanguage === 'function') {
+                updateLanguage();
+            }
+        }
+    </script>
     <style>
         * {
             margin: 0;
@@ -992,72 +1057,6 @@
     </style>
 </head>
 <body>
-    <script>
-        // Define all functions immediately when body loads
-        function showPage(page) {
-            const homePage = document.getElementById('home');
-            const aboutPage = document.getElementById('about');
-            const privacyPage = document.getElementById('privacy');
-            const homeFooter = document.getElementById('home-footer');
-            const navLinks = document.querySelectorAll('nav a');
-            
-            navLinks.forEach(link => link.classList.remove('active'));
-            
-            // Hide all pages first
-            if (homePage) homePage.style.display = 'none';
-            if (aboutPage) aboutPage.style.display = 'none';
-            if (privacyPage) privacyPage.style.display = 'none';
-            if (homeFooter) homeFooter.style.display = 'none';
-            
-            if (page === 'home' && homePage) {
-                homePage.style.display = 'flex';
-                if (homeFooter) homeFooter.style.display = 'block';
-                if (navLinks[0]) navLinks[0].classList.add('active');
-            } else if (page === 'about' && aboutPage) {
-                aboutPage.style.display = 'block';
-                if (navLinks[1]) navLinks[1].classList.add('active');
-            } else if (page === 'privacy' && privacyPage) {
-                privacyPage.style.display = 'block';
-                // Don't set any nav link as active since Privacy is not in the header
-            }
-            
-            // Scroll to top when changing pages
-            window.scrollTo(0, 0);
-        }
-        
-        function openModal() {
-            const modal = document.getElementById('betaModal');
-            if (modal) {
-                modal.classList.add('show');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('betaModal');
-            if (modal) {
-                modal.classList.remove('show');
-                document.body.style.overflow = 'auto';
-                const form = document.getElementById('betaForm');
-                if (form) form.reset();
-            }
-        }
-        
-        function changeLanguage(lang) {
-            if (lang === window.currentLanguage) return;
-            
-            window.currentLanguage = lang;
-            localStorage.setItem('preferredLanguage', lang);
-            updateLanguage();
-        }
-        
-        // Make functions globally accessible
-        window.showPage = showPage;
-        window.openModal = openModal;
-        window.closeModal = closeModal;
-        window.changeLanguage = changeLanguage;
-    </script>
-    
     <header>
         <div class="header-container">
             <a href="#" class="logo" onclick="showPage('home'); return false;">

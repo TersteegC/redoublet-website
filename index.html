@@ -992,6 +992,72 @@
     </style>
 </head>
 <body>
+    <script>
+        // Define all functions immediately when body loads
+        function showPage(page) {
+            const homePage = document.getElementById('home');
+            const aboutPage = document.getElementById('about');
+            const privacyPage = document.getElementById('privacy');
+            const homeFooter = document.getElementById('home-footer');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            // Hide all pages first
+            if (homePage) homePage.style.display = 'none';
+            if (aboutPage) aboutPage.style.display = 'none';
+            if (privacyPage) privacyPage.style.display = 'none';
+            if (homeFooter) homeFooter.style.display = 'none';
+            
+            if (page === 'home' && homePage) {
+                homePage.style.display = 'flex';
+                if (homeFooter) homeFooter.style.display = 'block';
+                if (navLinks[0]) navLinks[0].classList.add('active');
+            } else if (page === 'about' && aboutPage) {
+                aboutPage.style.display = 'block';
+                if (navLinks[1]) navLinks[1].classList.add('active');
+            } else if (page === 'privacy' && privacyPage) {
+                privacyPage.style.display = 'block';
+                // Don't set any nav link as active since Privacy is not in the header
+            }
+            
+            // Scroll to top when changing pages
+            window.scrollTo(0, 0);
+        }
+        
+        function openModal() {
+            const modal = document.getElementById('betaModal');
+            if (modal) {
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('betaModal');
+            if (modal) {
+                modal.classList.remove('show');
+                document.body.style.overflow = 'auto';
+                const form = document.getElementById('betaForm');
+                if (form) form.reset();
+            }
+        }
+        
+        function changeLanguage(lang) {
+            if (lang === window.currentLanguage) return;
+            
+            window.currentLanguage = lang;
+            localStorage.setItem('preferredLanguage', lang);
+            updateLanguage();
+        }
+        
+        // Make functions globally accessible
+        window.showPage = showPage;
+        window.openModal = openModal;
+        window.closeModal = closeModal;
+        window.changeLanguage = changeLanguage;
+    </script>
+    
     <header>
         <div class="header-container">
             <a href="#" class="logo" onclick="showPage('home'); return false;">
@@ -1303,38 +1369,6 @@
     </main>
 
     <script>
-        // Make showPage globally accessible
-        window.showPage = function(page) {
-            const homePage = document.getElementById('home');
-            const aboutPage = document.getElementById('about');
-            const privacyPage = document.getElementById('privacy');
-            const homeFooter = document.getElementById('home-footer');
-            const navLinks = document.querySelectorAll('nav a');
-            
-            navLinks.forEach(link => link.classList.remove('active'));
-            
-            // Hide all pages first
-            homePage.style.display = 'none';
-            aboutPage.style.display = 'none';
-            privacyPage.style.display = 'none';
-            homeFooter.style.display = 'none';
-            
-            if (page === 'home') {
-                homePage.style.display = 'flex';
-                homeFooter.style.display = 'block';
-                navLinks[0].classList.add('active');
-            } else if (page === 'about') {
-                aboutPage.style.display = 'block';
-                navLinks[1].classList.add('active');
-            } else if (page === 'privacy') {
-                privacyPage.style.display = 'block';
-                // Don't set any nav link as active since Privacy is not in the header
-            }
-            
-            // Scroll to top when changing pages
-            window.scrollTo(0, 0);
-        }
-
         // Translation data
         const translations = {
             en: {

@@ -107,6 +107,55 @@
                 updateLanguage();
             }
         }
+        
+        async function submitBetaForm(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const platformInput = document.querySelector('input[name="platform"]:checked');
+            
+            if (!platformInput) {
+                alert('Please select a platform');
+                return;
+            }
+            
+            const platform = platformInput.value;
+            
+            // Show loading state
+            const submitBtn = event.target.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Use the full Netlify URL to ensure it works from custom domain
+                const response = await fetch('https://thunderous-twilight-ec953b.netlify.app/.netlify/functions/beta-signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, platform })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    // Success message
+                    alert('Thank you for signing up! Check your email for confirmation.');
+                    closeModal();
+                } else {
+                    // Error message
+                    alert(result.error || 'There was an error. Please try again or email us directly.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error connecting to our server. Please try again or email us directly at christiaan.tersteeg@redoublet.com');
+            } finally {
+                // Reset button state
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        }
     </script>
     <style>
         * {
@@ -1231,7 +1280,7 @@
             <div class="privacy-container">
                 <div class="privacy-header">
                     <h1 class="privacy-title" data-i18n="privacy-title">Privacy Policy</h1>
-                    <p class="privacy-updated" data-i18n="privacy-updated">Last updated: September 2025</p>
+                    <p class="privacy-updated" data-i18n="privacy-updated">Last updated: January 2025</p>
                 </div>
 
                 <div class="privacy-section">
@@ -1656,4 +1705,3 @@
                         .join('');
                 }
             });
-

@@ -76,7 +76,15 @@
         // Check hash on initial load
         window.addEventListener('DOMContentLoaded', function() {
             setTimeout(handleHashChange, 100); // Small delay to ensure DOM is ready
+            initializeLanguage();
         });
+
+        function initializeLanguage() {
+            const savedLanguage = localStorage.getItem('preferredLanguage') || 'en';
+            window.currentLanguage = savedLanguage;
+            updateLanguage();
+            updateLanguageButtons();
+        }
         
         function openModal() {
             setTimeout(function() {
@@ -100,11 +108,33 @@
         
         function changeLanguage(lang) {
             if (typeof window.currentLanguage !== 'undefined' && lang === window.currentLanguage) return;
-            
+
             window.currentLanguage = lang;
             localStorage.setItem('preferredLanguage', lang);
-            if (typeof updateLanguage === 'function') {
-                updateLanguage();
+            updateLanguage();
+            updateLanguageButtons();
+        }
+
+        function updateLanguage() {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[window.currentLanguage] && translations[window.currentLanguage][key]) {
+                    element.textContent = translations[window.currentLanguage][key];
+                }
+            });
+        }
+
+        function updateLanguageButtons() {
+            const langBtns = document.querySelectorAll('.lang-btn');
+            langBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            if (window.currentLanguage === 'en') {
+                document.querySelector('.lang-btn[onclick*="en"]').classList.add('active');
+            } else if (window.currentLanguage === 'nl') {
+                document.querySelector('.lang-btn[onclick*="nl"]').classList.add('active');
             }
         }
         
@@ -367,7 +397,7 @@
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            align-items: flex-start;
+            align-items: flex-end;
             gap: 60px;
             min-height: calc(100vh - 160px);
         }
@@ -464,11 +494,10 @@
         .beta-box {
             background: #fff;
             border-radius: 20px;
-            padding: 60px 40px;
+            padding: 40px 40px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             position: relative;
             overflow: hidden;
-            min-height: 400px;
             display: flex;
             flex-direction: column;
             justify-content: center;

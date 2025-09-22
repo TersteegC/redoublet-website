@@ -147,9 +147,15 @@
             nl: 'https://www.youtube.com/embed/l1AtAw1uF4E?enablejsapi=1&loop=1&playlist=l1AtAw1uF4E'
         };
 
-        function playVideo() {
+        function playVideo(event) {
             const wrapper = document.getElementById('videoWrapper');
             const iframe = document.getElementById('youtubeVideo');
+
+            // Prevent event bubbling to avoid double-tap issues
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
 
             // Add playing class to hide the button
             wrapper.classList.add('playing');
@@ -643,6 +649,13 @@
             z-index: 10;
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(8, 8, 217, 0.4);
+            touch-action: manipulation;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         .video-play-button:hover {
@@ -1288,7 +1301,7 @@
             .logo-image {
                 display: none; /* Hide pictogram on mobile */
             }
-            
+
             .logo {
                 gap: 0; /* Remove gap since image is hidden */
             }
@@ -1301,6 +1314,15 @@
 
             .video-section, .beta-section {
                 width: 100%;
+            }
+
+            /* Make video appear first on mobile */
+            .video-section {
+                order: 1;
+            }
+
+            .beta-section {
+                order: 2;
             }
 
             .video-container {
@@ -1552,23 +1574,6 @@
     <main>
         <!-- Landing Page -->
         <section id="home">
-            <div class="video-section">
-                <div class="video-container">
-                    <h2 style="font-family: 'Merriweather', serif; font-size: 32px; margin-bottom: 20px; color: #0808D9;" data-i18n="video-title">Improve your bridge game</h2>
-                    <div class="video-wrapper" id="videoWrapper">
-                        <div class="video-play-button" onclick="playVideo()"></div>
-                        <iframe
-                            id="youtubeVideo"
-                            src="https://www.youtube.com/embed/XHyOZ04pDkE?enablejsapi=1&loop=1&playlist=XHyOZ04pDkE"
-                            title="Redoublet.com App Features"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-
             <div class="beta-section">
                 <!-- About the App Box -->
                 <div class="about-app-box">
@@ -1600,6 +1605,23 @@
                 <div class="beta-box">
                     <h1 class="beta-title" data-i18n="beta-title">BETA testers wanted!</h1>
                     <button class="beta-button" onclick="openModal()" data-i18n="beta-button">Become a Tester</button>
+                </div>
+            </div>
+
+            <div class="video-section">
+                <div class="video-container">
+                    <h2 style="font-family: 'Merriweather', serif; font-size: 32px; margin-bottom: 20px; color: #0808D9;" data-i18n="video-title">Improve your bridge game</h2>
+                    <div class="video-wrapper" id="videoWrapper">
+                        <div class="video-play-button" onclick="playVideo(event)" ontouchstart="playVideo(event)"></div>
+                        <iframe
+                            id="youtubeVideo"
+                            src="https://www.youtube.com/embed/XHyOZ04pDkE?enablejsapi=1&loop=1&playlist=XHyOZ04pDkE"
+                            title="Redoublet.com App Features"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
                 </div>
             </div>
         </section>

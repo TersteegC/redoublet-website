@@ -84,6 +84,7 @@
             window.currentLanguage = savedLanguage;
             updateLanguage();
             updateLanguageButtons();
+            updateVideo();
         }
         
         function openModal() {
@@ -107,19 +108,18 @@
         }
         
         function changeLanguage(lang) {
-            if (typeof window.currentLanguage !== 'undefined' && lang === window.currentLanguage) return;
-
             window.currentLanguage = lang;
             localStorage.setItem('preferredLanguage', lang);
             updateLanguage();
             updateLanguageButtons();
+            updateVideo();
         }
 
         function updateLanguage() {
             const elements = document.querySelectorAll('[data-i18n]');
             elements.forEach(element => {
                 const key = element.getAttribute('data-i18n');
-                if (translations[window.currentLanguage] && translations[window.currentLanguage][key]) {
+                if (translations && translations[window.currentLanguage] && translations[window.currentLanguage][key]) {
                     element.textContent = translations[window.currentLanguage][key];
                 }
             });
@@ -131,13 +131,51 @@
                 btn.classList.remove('active');
             });
 
-            if (window.currentLanguage === 'en') {
-                document.querySelector('.lang-btn[onclick*="en"]').classList.add('active');
-            } else if (window.currentLanguage === 'nl') {
-                document.querySelector('.lang-btn[onclick*="nl"]').classList.add('active');
+            const enBtn = document.querySelector('.lang-btn[onclick*="en"]');
+            const nlBtn = document.querySelector('.lang-btn[onclick*="nl"]');
+
+            if (window.currentLanguage === 'en' && enBtn) {
+                enBtn.classList.add('active');
+            } else if (window.currentLanguage === 'nl' && nlBtn) {
+                nlBtn.classList.add('active');
             }
         }
         
+        // Video URLs for different languages
+        const videoUrls = {
+            en: 'https://www.youtube.com/embed/XHyOZ04pDkE?enablejsapi=1&loop=1&playlist=XHyOZ04pDkE',
+            nl: 'https://www.youtube.com/embed/l1AtAw1uF4E?enablejsapi=1&loop=1&playlist=l1AtAw1uF4E'
+        };
+
+        function playVideo() {
+            const wrapper = document.getElementById('videoWrapper');
+            const iframe = document.getElementById('youtubeVideo');
+
+            // Add playing class to hide the button
+            wrapper.classList.add('playing');
+
+            // Get current language and update iframe src with autoplay
+            const currentLang = window.currentLanguage || 'en';
+            const videoUrl = videoUrls[currentLang] + '&autoplay=1';
+            iframe.src = videoUrl;
+        }
+
+        function updateVideo() {
+            const iframe = document.getElementById('youtubeVideo');
+            const wrapper = document.getElementById('videoWrapper');
+
+            if (iframe && wrapper) {
+                // Get current language
+                const currentLang = window.currentLanguage || 'en';
+
+                // Reset video wrapper state
+                wrapper.classList.remove('playing');
+
+                // Update video URL without autoplay
+                iframe.src = videoUrls[currentLang];
+            }
+        }
+
         async function submitBetaForm(event) {
             event.preventDefault();
             
@@ -186,6 +224,156 @@
                 submitBtn.disabled = false;
             }
         }
+
+        // Translation data
+        const translations = {
+            en: {
+                'nav-home': 'Home',
+                'nav-about': 'About Us',
+                'nav-privacy': 'Privacy',
+                'video-title': 'How our app works',
+                'about-app-title': 'About the app',
+                'feature-1-title': 'Analyse game',
+                'feature-1-subtitle': 'Improve your bridge game',
+                'feature-1-text': 'Take pictures of all 4 hands. Enter the board details and you get the optimum play from a double dummy perspective (all hands open). You can also ask advice from our robot which will show both the bidding and the play.',
+                'feature-2-title': 'Score tracker',
+                'feature-2-subtitle': 'Turn every rubber game into a duplicate',
+                'feature-2-text': 'You take pictures of all hands and you select which benchmark to use, DDS or Robot. Then you enter your own score and the delta (IMP) is calculated. Keep track of all the boards you play.',
+                'beta-title': 'BETA testers wanted!',
+                'beta-button': 'Become a Tester',
+                'modal-title': 'Join Our Beta Program',
+                'modal-subtitle': 'Be among the first to test Redoublet.com and help us improve your bridge game',
+                'modal-email': 'Email Address *',
+                'modal-email-note': 'Please use the same email address that you use to login to the Play Store (Android) or App Store (iOS), so you can access the beta app.',
+                'modal-platform': 'Select Platform *',
+                'modal-submit': 'Submit',
+                'modal-cancel': 'Cancel',
+                'about-title': 'About Redoublet.com',
+                'about-text-1': 'Redoublet.com was founded by Quirinus (father) and Christiaan Tersteeg (son). Our ambition with Redoublet.com is to provide a unique app that allows people to analyse their physical bridge game and see what was the optimal play. Later we will also launch online play options.',
+                'about-text-2': 'If you have any feedback for us or would like to collaborate with us, don\'t hesitate to reach out.',
+                'about-enjoy': 'Enjoy the app!',
+                'about-and': 'and',
+                'contact-title': 'Get in Touch',
+                'contact-subtitle': 'We\'d love to hear from you!',
+                'contact-label': 'Contact:',
+                'submit-sending': 'Sending...',
+                'success-message': 'Thank you for signing up! Check your email for confirmation.',
+                'error-message': 'There was an error connecting to our server. Please try again or email us directly at christiaan.tersteeg@redoublet.com',
+                'lang-english': 'English',
+                'lang-dutch': 'Nederlands',
+                'footer-privacy': 'Privacy Policy',
+                'footer-about': 'About Us',
+                'footer-contact': 'Contact',
+                'footer-copyright': '© 2025 Redoublet.com - All rights reserved',
+                'privacy-title': 'Privacy Policy',
+                'privacy-updated': 'Last updated: January 2025',
+                'privacy-intro-title': '1. Introduction',
+                'privacy-intro-text': 'Redoublet.com ("we", "our", or "us") respects your privacy and is committed to protecting your personal data. This privacy policy explains how we collect, use, and protect your information when you use our website and mobile application.',
+                'privacy-controller-title': '2. Data Controller',
+                'privacy-controller-text': 'The data controller responsible for your personal data is Redoublet.com, operated by Quirinus and Christiaan Tersteeg. You can contact us at:',
+                'privacy-data-title': '3. Data We Collect',
+                'privacy-data-intro': 'We may collect and process the following personal data:',
+                'privacy-data-beta-title': 'Beta Testing Program:',
+                'privacy-data-app-title': 'When Using Our App:',
+                'privacy-camera-title': '4. Camera Usage and Photo Processing',
+                'privacy-camera-text': 'Our app uses your device\'s camera to scan and detect bridge cards. Important information about this feature:',
+                'privacy-legal-title': '5. Legal Basis for Processing',
+                'privacy-legal-text': 'We process your personal data based on:',
+                'privacy-use-title': '6. How We Use Your Data',
+                'privacy-use-text': 'We use your personal data to:',
+                'privacy-sharing-title': '7. Data Sharing',
+                'privacy-sharing-text': 'We do not sell your personal data. We may share your data with:',
+                'privacy-retention-title': '8. Data Retention',
+                'privacy-retention-text': 'We retain your personal data only as long as necessary for the purposes described in this policy. Beta tester information is kept during the testing period and for a reasonable time after launch. You can request deletion of your data at any time.',
+                'privacy-rights-title': '9. Your Rights (GDPR)',
+                'privacy-rights-text': 'Under the General Data Protection Regulation (GDPR), you have the following rights:',
+                'privacy-security-title': '10. Data Security',
+                'privacy-security-text': 'We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction. However, no internet transmission is completely secure, and we cannot guarantee absolute security.',
+                'privacy-cookies-title': '11. Cookies',
+                'privacy-cookies-text': 'Our website uses essential cookies to ensure proper functionality. We also use analytics cookies to understand how visitors interact with our website. You can control cookie preferences through your browser settings.',
+                'privacy-children-title': '12. Children\'s Privacy',
+                'privacy-children-text': 'Our services are not directed to children under 16. We do not knowingly collect personal data from children under 16. If you believe we have collected data from a child under 16, please contact us immediately.',
+                'privacy-changes-title': '13. Changes to This Policy',
+                'privacy-changes-text': 'We may update this privacy policy from time to time. We will notify you of any significant changes by posting the new policy on this page and updating the "Last updated" date.',
+                'privacy-complaints-title': '14. Complaints',
+                'privacy-complaints-text': 'If you have concerns about how we handle your personal data, you have the right to lodge a complaint with the Dutch Data Protection Authority (Autoriteit Persoonsgegevens) or your local supervisory authority.',
+                'privacy-contact-title': 'Contact Us',
+                'privacy-contact-text': 'If you have any questions about this privacy policy or our data practices, please contact us:'
+            },
+            nl: {
+                'nav-home': 'Home',
+                'nav-about': 'Over Ons',
+                'nav-privacy': 'Privacy',
+                'video-title': 'Zo werkt onze app',
+                'about-app-title': 'Over de app',
+                'feature-1-title': 'Analyseer spel',
+                'feature-1-subtitle': 'Verbeter je bridgespel',
+                'feature-1-text': 'Maak foto\'s van alle 4 handen. Voer de spelgegevens in en je krijgt het optimale spel vanuit een double dummy perspectief (alle handen open). Je kunt ook advies vragen aan onze robot.',
+                'feature-2-title': 'Scorebriefje',
+                'feature-2-subtitle': 'Geen koffertjes of scoretabellen meer nodig',
+                'feature-2-text': 'Je maakt foto\'s van alle handen en je selecteert de benchmark: DDS of Robot. Vervolgens voer je je eigen score in en wordt het verschil (Butler/IMP) berekend. Houdt de score bij voor alle spellen die je speelt.',
+                'beta-title': 'BETA testers gezocht!',
+                'beta-button': 'Word een Tester',
+                'modal-title': 'Schrijf je in als Tester',
+                'modal-subtitle': 'Word een van de eersten om Redoublet.com te testen',
+                'modal-email': 'E-mailadres *',
+                'modal-email-note': 'Gebruik hetzelfde e-mailadres dat u gebruikt om in te loggen bij de Play Store (Android) of App Store (iOS), zodat u toegang heeft tot de beta-app.',
+                'modal-platform': 'Selecteer Platform *',
+                'modal-submit': 'Verstuur',
+                'modal-cancel': 'Annuleer',
+                'about-title': 'Over Redoublet.com',
+                'about-text-1': 'Redoublet.com is opgericht door Quirinus (vader) en Christiaan Tersteeg (zoon). Onze ambitie met Redoublet.com is om een unieke app te bieden waarmee mensen hun fysieke bridge spel kunnen analyseren en kunnen zien wat de optimale speelwijze was. Later zullen we ook online speelmogelijkheden lanceren.',
+                'about-text-2': 'Als je feedback voor ons hebt of met ons wilt samenwerken, aarzel dan niet om contact op te nemen.',
+                'about-enjoy': 'Veel speelplezier!',
+                'about-and': 'en',
+                'contact-title': 'Neem Contact Op',
+                'contact-subtitle': 'We horen graag van je!',
+                'contact-label': 'Contact:',
+                'submit-sending': 'Versturen...',
+                'success-message': 'Bedankt voor je aanmelding! We nemen contact op over de installatie van de BETA app.',
+                'error-message': 'Er is een fout opgetreden bij het verbinden met onze server. Probeer het opnieuw of e-mail ons direct op christiaan.tersteeg@redoublet.com',
+                'lang-english': 'English',
+                'lang-dutch': 'Nederlands',
+                'footer-privacy': 'Privacybeleid',
+                'footer-about': 'Over Ons',
+                'footer-contact': 'Contact',
+                'footer-copyright': '© 2025 Redoublet.com - Alle rechten voorbehouden',
+                'privacy-title': 'Privacybeleid',
+                'privacy-updated': 'Laatst bijgewerkt: januari 2025',
+                'privacy-intro-title': '1. Inleiding',
+                'privacy-intro-text': 'Redoublet.com ("wij", "ons", of "onze") respecteert uw privacy en is toegewijd aan het beschermen van uw persoonsgegevens. Dit privacybeleid legt uit hoe wij uw informatie verzamelen, gebruiken en beschermen wanneer u onze website en mobiele applicatie gebruikt.',
+                'privacy-controller-title': '2. Verwerkingsverantwoordelijke',
+                'privacy-controller-text': 'De verwerkingsverantwoordelijke voor uw persoonsgegevens is Redoublet.com, geëxploiteerd door Quirinus en Christiaan Tersteeg. U kunt contact met ons opnemen via:',
+                'privacy-data-title': '3. Gegevens die wij verzamelen',
+                'privacy-data-intro': 'Wij kunnen de volgende persoonsgegevens verzamelen en verwerken:',
+                'privacy-data-beta-title': 'Beta Testprogramma:',
+                'privacy-data-app-title': 'Bij gebruik van onze App:',
+                'privacy-camera-title': '4. Cameragebruik en Fotoverwerking',
+                'privacy-camera-text': 'Onze app gebruikt de camera van uw apparaat om bridgekaarten te scannen en detecteren. Belangrijke informatie over deze functie:',
+                'privacy-legal-title': '5. Rechtmatige grondslag voor verwerking',
+                'privacy-legal-text': 'Wij verwerken uw persoonsgegevens op basis van:',
+                'privacy-use-title': '6. Hoe wij uw gegevens gebruiken',
+                'privacy-use-text': 'Wij gebruiken uw persoonsgegevens om:',
+                'privacy-sharing-title': '7. Gegevens delen',
+                'privacy-sharing-text': 'Wij verkopen uw persoonsgegevens niet. Wij kunnen uw gegevens delen met:',
+                'privacy-retention-title': '8. Gegevensretentie',
+                'privacy-retention-text': 'Wij bewaren uw persoonsgegevens alleen zo lang als noodzakelijk voor de doeleinden beschreven in dit beleid. Beta tester informatie wordt bewaard tijdens de testperiode en voor een redelijke tijd na de lancering. U kunt te allen tijde verwijdering van uw gegevens aanvragen.',
+                'privacy-rights-title': '9. Uw rechten (AVG)',
+                'privacy-rights-text': 'Onder de Algemene Verordening Gegevensbescherming (AVG) heeft u de volgende rechten:',
+                'privacy-security-title': '10. Gegevensbeveiliging',
+                'privacy-security-text': 'Wij implementeren passende technische en organisatorische maatregelen om uw persoonsgegevens te beschermen tegen ongeautoriseerde toegang, wijziging, openbaarmaking of vernietiging. Echter, geen internettransmissie is volledig veilig, en wij kunnen geen absolute veiligheid garanderen.',
+                'privacy-cookies-title': '11. Cookies',
+                'privacy-cookies-text': 'Onze website gebruikt essentiële cookies om de juiste functionaliteit te waarborgen. Wij gebruiken ook analytische cookies om te begrijpen hoe bezoekers met onze website omgaan. U kunt cookievoorkeuren beheren via uw browserinstellingen.',
+                'privacy-children-title': '12. Privacy van kinderen',
+                'privacy-children-text': 'Onze diensten zijn niet gericht op kinderen onder de 16 jaar. Wij verzamelen niet bewust persoonsgegevens van kinderen onder de 16 jaar. Als u denkt dat wij gegevens van een kind onder de 16 jaar hebben verzameld, neem dan onmiddellijk contact met ons op.',
+                'privacy-changes-title': '13. Wijzigingen in dit beleid',
+                'privacy-changes-text': 'Wij kunnen dit privacybeleid van tijd tot tijd bijwerken. Wij zullen u op de hoogte stellen van belangrijke wijzigingen door het nieuwe beleid op deze pagina te plaatsen en de datum "Laatst bijgewerkt" aan te passen.',
+                'privacy-complaints-title': '14. Klachten',
+                'privacy-complaints-text': 'Als u zorgen heeft over hoe wij uw persoonsgegevens behandelen, heeft u het recht om een klacht in te dienen bij de Autoriteit Persoonsgegevens of uw lokale toezichthoudende autoriteit.',
+                'privacy-contact-title': 'Contact',
+                'privacy-contact-text': 'Als u vragen heeft over dit privacybeleid of onze gegevenspraktijken, neem dan contact met ons op:'
+            }
+        };
     </script>
     <style>
         * {
@@ -397,13 +585,15 @@
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
-            align-items: flex-end;
+            align-items: flex-start;
             gap: 60px;
             min-height: calc(100vh - 160px);
         }
 
         .video-section, .beta-section {
             flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .video-container {
@@ -411,6 +601,63 @@
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            height: 100%;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 142.22%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background-color: #0808D9;
+            border: 4px solid white;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(8, 8, 217, 0.4);
+        }
+
+        .video-play-button:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 15px 40px rgba(8, 8, 217, 0.5);
+        }
+
+        .video-play-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 55%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            border-left: 35px solid white;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+        }
+
+        .video-wrapper.playing .video-play-button {
+            display: none;
         }
 
         @keyframes pulse {
@@ -421,29 +668,31 @@
 
         .beta-section {
             text-align: center;
+            justify-content: space-between;
+            height: 100%;
         }
 
         /* About the App Box Styles */
         .about-app-box {
             background: #fff;
             border-radius: 20px;
-            padding: 40px;
+            padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
+            flex-shrink: 0;
         }
 
         .about-app-title {
             font-family: 'Merriweather', serif;
             font-size: 32px;
             color: #0808D9;
-            margin-bottom: 30px;
+            margin-bottom: 5px;
             text-align: center;
         }
 
         .app-features {
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 18px;
         }
 
         .app-feature {
@@ -461,17 +710,13 @@
             transform: translateX(5px);
         }
 
-        .feature-number {
+        .feature-icon {
             min-width: 40px;
             height: 40px;
-            background: #ff6b6b;
-            color: white;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 20px;
+            font-size: 28px;
             flex-shrink: 0;
         }
 
@@ -479,8 +724,17 @@
             font-family: 'Poppins', sans-serif;
             font-size: 20px;
             color: #0808D9;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             font-weight: 700;
+        }
+
+        .feature-subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            color: #0808D9;
+            margin-bottom: 8px;
+            font-weight: 400;
+            font-style: normal;
         }
 
         .app-feature p {
@@ -501,6 +755,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            flex-shrink: 0;
         }
 
         .beta-box::before {
@@ -1066,10 +1321,10 @@
                 gap: 15px;
             }
 
-            .feature-number {
+            .feature-icon {
                 min-width: 32px;
                 height: 32px;
-                font-size: 16px;
+                font-size: 22px;
             }
 
             .app-feature h3 {
@@ -1290,48 +1545,54 @@
     <main>
         <!-- Landing Page -->
         <section id="home">
-            <div class="video-section">
-                <div class="video-container">
-                    <h2 style="font-family: 'Merriweather', serif; font-size: 32px; margin-bottom: 20px; color: #0808D9;" data-i18n="video-title">Improve your bridge game</h2>
-                    <div class="video-wrapper" style="position: relative; width: 100%; padding-bottom: 142.22%; height: 0; overflow: hidden; border-radius: 12px;">
-                        <iframe 
-                            src="https://www.youtube.com/embed/L-oTc8I5_uA?loop=1&playlist=L-oTc8I5_uA&autoplay=1&mute=1" 
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
-                            title="Redoublet.com App Features"
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-
             <div class="beta-section">
                 <!-- About the App Box -->
                 <div class="about-app-box">
                     <h2 class="about-app-title" data-i18n="about-app-title">About the app</h2>
                     <div class="app-features">
                         <div class="app-feature">
-                            <div class="feature-number">1</div>
+                            <div class="feature-icon">📸</div>
                             <div>
                                 <h3 data-i18n="feature-1-title">Analyse game</h3>
+                                <h4 class="feature-subtitle" data-i18n="feature-1-subtitle">Improve your bridge game</h4>
                                 <p data-i18n="feature-1-text">Take pictures of all 4 hands. Enter the board details and you get the optimum play from a double dummy perspective (all hands open). You can also ask advice from our robot which will show both the bidding and the play.</p>
                             </div>
                         </div>
                         <div class="app-feature">
-                            <div class="feature-number">2</div>
+                            <div class="feature-icon">📊</div>
                             <div>
                                 <h3 data-i18n="feature-2-title">Score tracker</h3>
-                                <p data-i18n="feature-2-text">Turn every rubber game you play into a duplicate game. You take pictures of all hands and you select which benchmark to use, DDS or Robot. Then you enter your own score and the delta (IMP) is calculated. Keep track of all the boards you play.</p>
+                                <h4 class="feature-subtitle" data-i18n="feature-2-subtitle">Turn every rubber game into a duplicate</h4>
+                                <p data-i18n="feature-2-text">You take pictures of all hands and you select which benchmark to use, DDS or Robot. Then you enter your own score and the delta (IMP) is calculated. Keep track of all the boards you play.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
+                <!-- Flexible spacer -->
+                <div style="flex: 1; min-height: 20px;"></div>
+
                 <!-- Beta Tester Box -->
-                <div class="beta-box" style="margin-top: 30px;">
+                <div class="beta-box">
                     <h1 class="beta-title" data-i18n="beta-title">BETA testers wanted!</h1>
                     <button class="beta-button" onclick="openModal()" data-i18n="beta-button">Become a Tester</button>
+                </div>
+            </div>
+
+            <div class="video-section">
+                <div class="video-container">
+                    <h2 style="font-family: 'Merriweather', serif; font-size: 32px; margin-bottom: 20px; color: #0808D9;" data-i18n="video-title">Improve your bridge game</h2>
+                    <div class="video-wrapper" id="videoWrapper">
+                        <div class="video-play-button" onclick="playVideo()"></div>
+                        <iframe
+                            id="youtubeVideo"
+                            src="https://www.youtube.com/embed/XHyOZ04pDkE?enablejsapi=1&loop=1&playlist=XHyOZ04pDkE"
+                            title="Redoublet.com App Features"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1595,149 +1856,3 @@
         </section>
     </main>
 
-    <script>
-        // Translation data
-        const translations = {
-            en: {
-                'nav-home': 'Home',
-                'nav-about': 'About Us',
-                'nav-privacy': 'Privacy',
-                'video-title': 'Improve your bridge game',
-                'about-app-title': 'About the app',
-                'feature-1-title': 'Analyse game',
-                'feature-1-text': 'Take pictures of all 4 hands. Enter the board details and you get the optimum play from a double dummy perspective (all hands open). You can also ask advice from our robot which will show both the bidding and the play.',
-                'feature-2-title': 'Score tracker',
-                'feature-2-text': 'Turn every rubber game you play into a duplicate game. You take pictures of all hands and you select which benchmark to use, DDS or Robot. Then you enter your own score and the delta (IMP) is calculated. Keep track of all the boards you play.',
-                'beta-title': 'BETA testers wanted!',
-                'beta-button': 'Become a Tester',
-                'modal-title': 'Join Our Beta Program',
-                'modal-subtitle': 'Be among the first to test Redoublet.com and help us improve your bridge game',
-                'modal-email': 'Email Address *',
-                'modal-email-note': 'Please use the same email address that you use to login to the Play Store (Android) or App Store (iOS), so you can access the beta app.',
-                'modal-platform': 'Select Platform *',
-                'modal-submit': 'Submit',
-                'modal-cancel': 'Cancel',
-                'about-title': 'About Redoublet.com',
-                'about-text-1': 'Redoublet.com was founded by Quirinus (father) and Christiaan Tersteeg (son). Our ambition with Redoublet.com is to provide a unique app that allows people to analyse their physical bridge game and see what was the optimal play. Later we will also launch online play options.',
-                'about-text-2': 'If you have any feedback for us or would like to collaborate with us, don\'t hesitate to reach out.',
-                'about-enjoy': 'Enjoy the app!',
-                'about-and': 'and',
-                'contact-title': 'Get in Touch',
-                'contact-subtitle': 'We\'d love to hear from you!',
-                'contact-label': 'Contact:',
-                'submit-sending': 'Sending...',
-                'success-message': 'Thank you for signing up! Check your email for confirmation.',
-                'error-message': 'There was an error connecting to our server. Please try again or email us directly at christiaan.tersteeg@redoublet.com',
-                'lang-english': 'English',
-                'lang-dutch': 'Nederlands',
-                'footer-privacy': 'Privacy Policy',
-                'footer-about': 'About Us',
-                'footer-contact': 'Contact',
-                'footer-copyright': '© 2025 Redoublet.com - All rights reserved',
-                // Privacy page translations
-                'privacy-title': 'Privacy Policy',
-                'privacy-updated': 'Last updated: January 2025',
-                'privacy-intro-title': '1. Introduction',
-                'privacy-intro-text': 'Redoublet.com ("we", "our", or "us") respects your privacy and is committed to protecting your personal data. This privacy policy explains how we collect, use, and protect your information when you use our website and mobile application.',
-                'privacy-controller-title': '2. Data Controller',
-                'privacy-controller-text': 'The data controller responsible for your personal data is Redoublet.com, operated by Quirinus and Christiaan Tersteeg. You can contact us at:',
-                'privacy-data-title': '3. Data We Collect',
-                'privacy-data-intro': 'We may collect and process the following personal data:',
-                'privacy-data-beta-title': 'Beta Testing Program:',
-                'privacy-data-app-title': 'When Using Our App:',
-                'privacy-camera-title': '4. Camera Usage and Photo Processing',
-                'privacy-camera-text': 'Our app uses your device\'s camera to scan and detect bridge cards. Important information about this feature:',
-                'privacy-legal-title': '5. Legal Basis for Processing',
-                'privacy-legal-text': 'We process your personal data based on:',
-                'privacy-use-title': '6. How We Use Your Data',
-                'privacy-use-text': 'We use your personal data to:',
-                'privacy-sharing-title': '7. Data Sharing',
-                'privacy-sharing-text': 'We do not sell your personal data. We may share your data with:',
-                'privacy-retention-title': '8. Data Retention',
-                'privacy-retention-text': 'We retain your personal data only as long as necessary for the purposes described in this policy. Beta tester information is kept during the testing period and for a reasonable time after launch. You can request deletion of your data at any time.',
-                'privacy-rights-title': '9. Your Rights (GDPR)',
-                'privacy-rights-text': 'Under the General Data Protection Regulation (GDPR), you have the following rights:',
-                'privacy-security-title': '10. Data Security',
-                'privacy-security-text': 'We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction. However, no internet transmission is completely secure, and we cannot guarantee absolute security.',
-                'privacy-cookies-title': '11. Cookies',
-                'privacy-cookies-text': 'Our website uses essential cookies to ensure proper functionality. We also use analytics cookies to understand how visitors interact with our website. You can control cookie preferences through your browser settings.',
-                'privacy-children-title': '12. Children\'s Privacy',
-                'privacy-children-text': 'Our services are not directed to children under 16. We do not knowingly collect personal data from children under 16. If you believe we have collected data from a child under 16, please contact us immediately.',
-                'privacy-changes-title': '13. Changes to This Policy',
-                'privacy-changes-text': 'We may update this privacy policy from time to time. We will notify you of any significant changes by posting the new policy on this page and updating the "Last updated" date.',
-                'privacy-complaints-title': '14. Complaints',
-                'privacy-complaints-text': 'If you have concerns about how we handle your personal data, you have the right to lodge a complaint with the Dutch Data Protection Authority (Autoriteit Persoonsgegevens) or your local supervisory authority.',
-                'privacy-contact-title': 'Contact Us',
-                'privacy-contact-text': 'If you have any questions about this privacy policy or our data practices, please contact us:'
-            },
-            nl: {
-                'nav-home': 'Home',
-                'nav-about': 'Over Ons',
-                'nav-privacy': 'Privacy',
-                'video-title': 'Verbeter je bridge spel',
-                'about-app-title': 'Over de app',
-                'feature-1-title': 'Analyseer spel',
-                'feature-1-text': 'Maak foto\'s van alle 4 handen. Voer de borddetails in en je krijgt het optimale spel vanuit een double dummy perspectief (alle handen open). Je kunt ook advies vragen aan onze robot die zowel het bieden als het spelen laat zien.',
-                'feature-2-title': 'Scorebriefje',
-                'feature-2-text': 'Verander elk robberspel dat je speelt in een duplicatespel. Je maakt foto\'s van alle handen en je selecteert welke benchmark je wilt gebruiken, DDS of Robot. Vervolgens voer je je eigen score in en wordt het verschil (IMP) berekend. Houd alle borden bij die je speelt.',
-                'beta-title': 'BETA testers gezocht!',
-                'beta-button': 'Word een Tester',
-                'modal-title': 'Schrijf je in als Tester',
-                'modal-subtitle': 'Word een van de eersten om Redoublet.com te testen',
-                'modal-email': 'E-mailadres *',
-                'modal-email-note': 'Gebruik hetzelfde e-mailadres dat u gebruikt om in te loggen bij de Play Store (Android) of App Store (iOS), zodat u toegang heeft tot de beta-app.',
-                'modal-platform': 'Selecteer Platform *',
-                'modal-submit': 'Verstuur',
-                'modal-cancel': 'Annuleer',
-                'about-title': 'Over Redoublet.com',
-                'about-text-1': 'Redoublet.com is opgericht door Quirinus (vader) en Christiaan Tersteeg (zoon). Onze ambitie met Redoublet.com is om een unieke app te bieden waarmee mensen hun fysieke bridge spel kunnen analyseren en kunnen zien wat de optimale speelwijze was. Later zullen we ook online speelmogelijkheden lanceren.',
-                'about-text-2': 'Als je feedback voor ons hebt of met ons wilt samenwerken, aarzel dan niet om contact op te nemen.',
-                'about-enjoy': 'Veel speelplezier!',
-                'about-and': 'en',
-                'contact-title': 'Neem Contact Op',
-                'contact-subtitle': 'We horen graag van je!',
-                'contact-label': 'Contact:',
-                'submit-sending': 'Versturen...',
-                'success-message': 'Bedankt voor je aanmelding! We nemen contact op over de installatie van de BETA app.',
-                'error-message': 'Er is een fout opgetreden bij het verbinden met onze server. Probeer het opnieuw of e-mail ons direct op christiaan.tersteeg@redoublet.com',
-                'lang-english': 'English',
-                'lang-dutch': 'Nederlands',
-                'footer-privacy': 'Privacybeleid',
-                'footer-about': 'Over Ons',
-                'footer-contact': 'Contact',
-                'footer-copyright': '© 2025 Redoublet.com - Alle rechten voorbehouden',
-                // Privacy page translations Dutch
-                'privacy-title': 'Privacybeleid',
-                'privacy-updated': 'Laatst bijgewerkt: januari 2025',
-                'privacy-intro-title': '1. Inleiding',
-                'privacy-intro-text': 'Redoublet.com ("wij", "ons", of "onze") respecteert uw privacy en is toegewijd aan het beschermen van uw persoonsgegevens. Dit privacybeleid legt uit hoe wij uw informatie verzamelen, gebruiken en beschermen wanneer u onze website en mobiele applicatie gebruikt.',
-                'privacy-controller-title': '2. Verwerkingsverantwoordelijke',
-                'privacy-controller-text': 'De verwerkingsverantwoordelijke voor uw persoonsgegevens is Redoublet.com, geëxploiteerd door Quirinus en Christiaan Tersteeg. U kunt contact met ons opnemen via:',
-                'privacy-data-title': '3. Gegevens die wij verzamelen',
-                'privacy-data-intro': 'Wij kunnen de volgende persoonsgegevens verzamelen en verwerken:',
-                'privacy-data-beta-title': 'Beta Testprogramma:',
-                'privacy-data-app-title': 'Bij gebruik van onze App:',
-                'privacy-camera-title': '4. Cameragebruik en Fotoverwerking',
-                'privacy-camera-text': 'Onze app gebruikt de camera van uw apparaat om bridgekaarten te scannen en detecteren. Belangrijke informatie over deze functie:',
-                'privacy-legal-title': '5. Rechtmatige grondslag voor verwerking',
-                'privacy-legal-text': 'Wij verwerken uw persoonsgegevens op basis van:',
-                'privacy-use-title': '6. Hoe wij uw gegevens gebruiken',
-                'privacy-use-text': 'Wij gebruiken uw persoonsgegevens om:',
-                'privacy-sharing-title': '7. Gegevens delen',
-                'privacy-sharing-text': 'Wij verkopen uw persoonsgegevens niet. Wij kunnen uw gegevens delen met:',
-                'privacy-retention-title': '8. Gegevensretentie',
-                'privacy-retention-text': 'Wij bewaren uw persoonsgegevens alleen zo lang als noodzakelijk voor de doeleinden beschreven in dit beleid. Beta tester informatie wordt bewaard tijdens de testperiode en voor een redelijke tijd na de lancering. U kunt te allen tijde verwijdering van uw gegevens aanvragen.',
-                'privacy-rights-title': '9. Uw rechten (AVG)',
-                'privacy-rights-text': 'Onder de Algemene Verordening Gegevensbescherming (AVG) heeft u de volgende rechten:',
-                'privacy-security-title': '10. Gegevensbeveiliging',
-                'privacy-security-text': 'Wij implementeren passende technische en organisatorische maatregelen om uw persoonsgegevens te beschermen tegen ongeautoriseerde toegang, wijziging, openbaarmaking of vernietiging. Echter, geen internettransmissie is volledig veilig, en wij kunnen geen absolute veiligheid garanderen.',
-                'privacy-cookies-title': '11. Cookies',
-                'privacy-cookies-text': 'Onze website gebruikt essentiële cookies om de juiste functionaliteit te waarborgen. Wij gebruiken ook analytische cookies om te begrijpen hoe bezoekers met onze website omgaan. U kunt cookievoorkeuren beheren via uw browserinstellingen.',
-                'privacy-children-title': '12. Privacy van kinderen',
-                'privacy-children-text': 'Onze diensten zijn niet gericht op kinderen onder de 16 jaar. Wij verzamelen niet bewust persoonsgegevens van kinderen onder de 16 jaar. Als u denkt dat wij gegevens van een kind onder de 16 jaar hebben verzameld, neem dan onmiddellijk contact met ons op.',
-                'privacy-changes-title': '13. Wijzigingen in dit beleid',
-                'privacy-changes-text': 'Wij kunnen dit privacybeleid van tijd tot tijd bijwerken. Wij zullen u op de hoogte stellen van belangrijke wijzigingen door het nieuwe beleid op deze pagina te plaatsen en de datum "Laatst bijgewerkt" aan te passen.',
-                'privacy-complaints-title': '14. Klachten',
-                'privacy-complaints-text': 'Als u zorgen heeft over hoe wij uw persoonsgegevens behandelen, heeft u het recht om een klacht in te dienen bij de Autoriteit Persoonsgegevens of uw lokale toezichthoudende autoriteit.',
-                'privacy-contact-title': 'Contact',
-                'privacy-contact-text': 'Als u vragen heeft over dit privacybeleid of onze gegevenspraktijken, neem dan contact met ons op:'

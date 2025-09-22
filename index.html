@@ -393,6 +393,74 @@
             text-align: center;
         }
 
+        /* About the App Box Styles */
+        .about-app-box {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .about-app-title {
+            font-family: 'Merriweather', serif;
+            font-size: 32px;
+            color: #0808D9;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .app-features {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .app-feature {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .app-feature:hover {
+            background: #f0f4f8;
+            transform: translateX(5px);
+        }
+
+        .feature-number {
+            min-width: 40px;
+            height: 40px;
+            background: #ff6b6b;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .app-feature h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            color: #0808D9;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .app-feature p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        /* Beta Box Styles */
         .beta-box {
             background: #fff;
             border-radius: 20px;
@@ -956,6 +1024,33 @@
                 padding-bottom: 177.78% !important; /* Full height for mobile */
             }
 
+            .about-app-box {
+                padding: 30px 20px;
+            }
+
+            .about-app-title {
+                font-size: 24px;
+            }
+
+            .app-feature {
+                padding: 15px;
+                gap: 15px;
+            }
+
+            .feature-number {
+                min-width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+
+            .app-feature h3 {
+                font-size: 18px;
+            }
+
+            .app-feature p {
+                font-size: 13px;
+            }
+
             .beta-box {
                 padding: 40px 20px;
                 min-height: auto;
@@ -1183,7 +1278,29 @@
             </div>
 
             <div class="beta-section">
-                <div class="beta-box">
+                <!-- About the App Box -->
+                <div class="about-app-box">
+                    <h2 class="about-app-title" data-i18n="about-app-title">About the app</h2>
+                    <div class="app-features">
+                        <div class="app-feature">
+                            <div class="feature-number">1</div>
+                            <div>
+                                <h3 data-i18n="feature-1-title">Analyse game</h3>
+                                <p data-i18n="feature-1-text">Take pictures of all 4 hands. Enter the board details and you get the optimum play from a double dummy perspective (all hands open). You can also ask advice from our robot which will show both the bidding and the play.</p>
+                            </div>
+                        </div>
+                        <div class="app-feature">
+                            <div class="feature-number">2</div>
+                            <div>
+                                <h3 data-i18n="feature-2-title">Score tracker</h3>
+                                <p data-i18n="feature-2-text">Turn every rubber game you play into a duplicate game. You take pictures of all hands and you select which benchmark to use, DDS or Robot. Then you enter your own score and the delta (IMP) is calculated. Keep track of all the boards you play.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Beta Tester Box -->
+                <div class="beta-box" style="margin-top: 30px;">
                     <h1 class="beta-title" data-i18n="beta-title">BETA testers wanted!</h1>
                     <button class="beta-button" onclick="openModal()" data-i18n="beta-button">Become a Tester</button>
                 </div>
@@ -1457,6 +1574,11 @@
                 'nav-about': 'About Us',
                 'nav-privacy': 'Privacy',
                 'video-title': 'Improve your bridge game',
+                'about-app-title': 'About the app',
+                'feature-1-title': 'Analyse game',
+                'feature-1-text': 'Take pictures of all 4 hands. Enter the board details and you get the optimum play from a double dummy perspective (all hands open). You can also ask advice from our robot which will show both the bidding and the play.',
+                'feature-2-title': 'Score tracker',
+                'feature-2-text': 'Turn every rubber game you play into a duplicate game. You take pictures of all hands and you select which benchmark to use, DDS or Robot. Then you enter your own score and the delta (IMP) is calculated. Keep track of all the boards you play.',
                 'beta-title': 'BETA testers wanted!',
                 'beta-button': 'Become a Tester',
                 'modal-title': 'Join Our Beta Program',
@@ -1524,6 +1646,11 @@
                 'nav-about': 'Over Ons',
                 'nav-privacy': 'Privacy',
                 'video-title': 'Verbeter je bridge spel',
+                'about-app-title': 'Over de app',
+                'feature-1-title': 'Analyseer spel',
+                'feature-1-text': 'Maak foto\'s van alle 4 handen. Voer de borddetails in en je krijgt het optimale spel vanuit een double dummy perspectief (alle handen open). Je kunt ook advies vragen aan onze robot die zowel het bieden als het spelen laat zien.',
+                'feature-2-title': 'Scorebriefje',
+                'feature-2-text': 'Verander elk robberspel dat je speelt in een duplicatespel. Je maakt foto\'s van alle handen en je selecteert welke benchmark je wilt gebruiken, DDS of Robot. Vervolgens voer je je eigen score in en wordt het verschil (IMP) berekend. Houd alle borden bij die je speelt.',
                 'beta-title': 'BETA testers gezocht!',
                 'beta-button': 'Word een Tester',
                 'modal-title': 'Schrijf je in als Tester',
@@ -1585,177 +1712,3 @@
                 'privacy-complaints-text': 'Als u zorgen heeft over hoe wij uw persoonsgegevens behandelen, heeft u het recht om een klacht in te dienen bij de Autoriteit Persoonsgegevens of uw lokale toezichthoudende autoriteit.',
                 'privacy-contact-title': 'Contact',
                 'privacy-contact-text': 'Als u vragen heeft over dit privacybeleid of onze gegevenspraktijken, neem dan contact met ons op:'
-            }
-        };
-
-        // Current language
-        let currentLanguage = 'en';
-
-        // Detect browser language
-        function detectBrowserLanguage() {
-            const browserLang = navigator.language || navigator.userLanguage;
-            // Check if browser language starts with 'nl' (for nl, nl-NL, nl-BE, etc.)
-            if (browserLang.toLowerCase().startsWith('nl')) {
-                return 'nl';
-            }
-            return 'en'; // Default to English
-        }
-
-        // Initialize language on page load
-        function initializeLanguage() {
-            const savedLanguage = localStorage.getItem('preferredLanguage');
-            if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'nl')) {
-                currentLanguage = savedLanguage;
-            } else {
-                currentLanguage = detectBrowserLanguage();
-            }
-            updateLanguage();
-        }
-
-        // Change language function
-        function changeLanguage(lang) {
-            if (lang === currentLanguage) return;
-            
-            currentLanguage = lang;
-            localStorage.setItem('preferredLanguage', lang);
-            updateLanguage();
-        }
-
-        // Update all text elements with translations
-        function updateLanguage() {
-            // Update HTML lang attribute
-            document.documentElement.lang = currentLanguage;
-            
-            // Update all elements with data-i18n attribute
-            const elements = document.querySelectorAll('[data-i18n]');
-            elements.forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                if (translations[currentLanguage][key]) {
-                    // Handle special cases for lists
-                    if (element.tagName === 'UL' && (
-                        key === 'privacy-data-beta-list' || 
-                        key === 'privacy-data-app-list' || 
-                        key === 'privacy-legal-list' || 
-                        key === 'privacy-use-list' || 
-                        key === 'privacy-sharing-list' ||
-                        key === 'privacy-rights-list'
-                    )) {
-                        // For these lists, we'll keep the existing structure
-                        return;
-                    }
-                    element.textContent = translations[currentLanguage][key];
-                }
-            });
-
-            // Special handling for privacy rights list (because of bold text)
-            if (document.querySelector('[data-i18n="privacy-rights-list"]')) {
-                const rightsList = document.querySelector('[data-i18n="privacy-rights-list"]');
-                if (currentLanguage === 'nl') {
-                    rightsList.innerHTML = `
-                        <li><strong>Inzage:</strong> Vraag een kopie van uw persoonsgegevens op</li>
-                        <li><strong>Rectificatie:</strong> Vraag correctie van onjuiste gegevens</li>
-                        <li><strong>Verwijdering:</strong> Vraag verwijdering van uw persoonsgegevens</li>
-                        <li><strong>Beperking:</strong> Vraag beperkte verwerking van uw gegevens</li>
-                        <li><strong>Overdraagbaarheid:</strong> Ontvang uw gegevens in een overdraagbaar formaat</li>
-                        <li><strong>Bezwaar:</strong> Maak bezwaar tegen bepaalde soorten verwerking</li>
-                        <li><strong>Toestemming intrekken:</strong> Trek toestemming op elk moment in</li>
-                    `;
-                } else {
-                    rightsList.innerHTML = `
-                        <li><strong>Access:</strong> Request a copy of your personal data</li>
-                        <li><strong>Rectification:</strong> Request correction of inaccurate data</li>
-                        <li><strong>Erasure:</strong> Request deletion of your personal data</li>
-                        <li><strong>Restriction:</strong> Request limited processing of your data</li>
-                        <li><strong>Portability:</strong> Receive your data in a portable format</li>
-                        <li><strong>Object:</strong> Object to certain types of processing</li>
-                        <li><strong>Withdraw consent:</strong> Withdraw consent at any time</li>
-                    `;
-                }
-            }
-
-            // Handle other lists
-            const dataLists = {
-                'privacy-data-beta-list': {
-                    en: ['Email address', 'Platform preference (iOS or Android)', 'Feedback and communications you send to us'],
-                    nl: ['E-mailadres', 'Platformvoorkeur (iOS of Android)', 'Feedback en communicatie die u ons stuurt']
-                },
-                'privacy-data-app-list': {
-                    en: ['Game statistics and bridge hands played', 'App usage data and preferences', 'Device information (device type, operating system)', 'Photos of bridge cards (sent to our API for processing, deleted after analysis)', 'Camera permissions (only when you actively use the card scanning feature)'],
-                    nl: ['Spelstatistieken en gespeelde bridge handen', 'App-gebruiksgegevens en voorkeuren', 'Apparaatinformatie (apparaattype, besturingssysteem)', 'Foto\'s van bridgekaarten (verzonden naar onze API voor verwerking, verwijderd na analyse)', 'Cameratoestemmingen (alleen wanneer u actief de kaartscanfunctie gebruikt)']
-                },
-                'privacy-camera-list': {
-                    en: ['Camera access is only requested when you choose to use the card scanning feature', 'Photos are sent to our secure API for card detection and analysis', 'Images are processed immediately and deleted from our servers after processing', 'We do not store or retain photos after card detection is complete', 'Card detection data is used solely to analyze your bridge game', 'All data transmission is encrypted using industry-standard protocols', 'You can revoke camera permissions at any time through your device settings'],
-                    nl: ['Cameratoegang wordt alleen gevraagd wanneer u ervoor kiest de kaartscanfunctie te gebruiken', 'Foto\'s worden naar onze beveiligde API verzonden voor kaartdetectie en analyse', 'Afbeeldingen worden onmiddellijk verwerkt en van onze servers verwijderd na verwerking', 'Wij slaan geen foto\'s op na voltooiing van de kaartdetectie', 'Kaartdetectiegegevens worden uitsluitend gebruikt om uw bridgespel te analyseren', 'Alle gegevensoverdracht is versleuteld met industriestandaard protocollen', 'U kunt cameratoestemmingen op elk moment intrekken via uw apparaatinstellingen']
-                },
-                'privacy-legal-list': {
-                    en: ['Your consent (for beta testing and marketing communications)', 'Legitimate interests (to improve our services and user experience)', 'Contract performance (to provide our services to you)'],
-                    nl: ['Uw toestemming (voor beta-testen en marketingcommunicatie)', 'Gerechtvaardigd belang (om onze diensten en gebruikerservaring te verbeteren)', 'Uitvoering van de overeenkomst (om onze diensten aan u te leveren)']
-                },
-                'privacy-use-list': {
-                    en: ['Manage beta testing participation', 'Send important updates about our app', 'Improve our services and user experience', 'Respond to your inquiries and provide support', 'Analyze app usage to enhance features', 'Comply with legal obligations'],
-                    nl: ['Beta-test deelname beheren', 'Belangrijke updates over onze app versturen', 'Onze diensten en gebruikerservaring verbeteren', 'Reageren op uw vragen en ondersteuning bieden', 'App-gebruik analyseren om functies te verbeteren', 'Voldoen aan wettelijke verplichtingen']
-                },
-                'privacy-sharing-list': {
-                    en: ['Service providers who assist in our operations (hosting, email services)', 'Beta testing platforms (TestFlight for iOS, Google Play Console for Android)', 'Legal authorities when required by law'],
-                    nl: ['Dienstverleners die ons helpen bij onze activiteiten (hosting, e-maildiensten)', 'Beta-testplatforms (TestFlight voor iOS, Google Play Console voor Android)', 'Juridische autoriteiten wanneer vereist door de wet']
-                }
-            };
-
-            // Update lists with proper translations
-            Object.keys(dataLists).forEach(listKey => {
-                const listElement = document.querySelector(`[data-i18n="${listKey}"]`);
-                if (listElement) {
-                    listElement.innerHTML = dataLists[listKey][currentLanguage]
-                        .map(item => `<li>${item}</li>`)
-                        .join('');
-                }
-            });
-
-            // Update language toggle buttons
-            const langButtons = document.querySelectorAll('.lang-btn');
-            langButtons.forEach(btn => {
-                btn.classList.remove('active');
-                const btnLang = btn.querySelector('span:first-child').textContent.toLowerCase();
-                if ((currentLanguage === 'en' && btnLang === 'en') ||
-                    (currentLanguage === 'nl' && btnLang === 'nl')) {
-                    btn.classList.add('active');
-                }
-            });
-            
-            // Update email placeholder
-            const emailInput = document.getElementById('email');
-            if (emailInput) {
-                emailInput.placeholder = currentLanguage === 'nl' ? 'jouw@email.com' : 'your@email.com';
-            }
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('betaModal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
-
-        // Add smooth scroll behavior
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-            });
-        });
-
-        // Add animation on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.15)';
-            } else {
-                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
-            }
-        });
-
-        // Initialize language when page loads
-        document.addEventListener('DOMContentLoaded', initializeLanguage);
-    </script>
-
-

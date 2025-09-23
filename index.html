@@ -24,17 +24,19 @@
                 const homePage = document.getElementById('home');
                 const aboutPage = document.getElementById('about');
                 const privacyPage = document.getElementById('privacy');
+                const faqPage = document.getElementById('faq');
                 const homeFooter = document.getElementById('home-footer');
                 const navLinks = document.querySelectorAll('nav a');
-                
+
                 navLinks.forEach(link => link.classList.remove('active'));
-                
+
                 // Hide all pages first
                 if (homePage) homePage.style.display = 'none';
                 if (aboutPage) aboutPage.style.display = 'none';
                 if (privacyPage) privacyPage.style.display = 'none';
+                if (faqPage) faqPage.style.display = 'none';
                 if (homeFooter) homeFooter.style.display = 'none';
-                
+
                 if (page === 'home' && homePage) {
                     homePage.style.display = 'flex';
                     if (homeFooter) homeFooter.style.display = 'block';
@@ -47,8 +49,11 @@
                 } else if (page === 'privacy' && privacyPage) {
                     privacyPage.style.display = 'block';
                     window.location.hash = 'privacy';
+                } else if (page === 'faq' && faqPage) {
+                    faqPage.style.display = 'block';
+                    window.location.hash = 'faq';
                 }
-                
+
                 window.scrollTo(0, 0);
             }, 0);
         }
@@ -56,13 +61,16 @@
         // Handle hash changes (back/forward navigation and direct URL access)
         function handleHashChange() {
             const hash = window.location.hash.slice(1); // Remove the # symbol
-            
+
             switch(hash) {
                 case 'about':
                     showPage('about');
                     break;
                 case 'privacy':
                     showPage('privacy');
+                    break;
+                case 'faq':
+                    showPage('faq');
                     break;
                 default:
                     showPage('home');
@@ -243,6 +251,38 @@
             }
         }
 
+        function toggleFAQ(element) {
+            const question = element;
+            const answer = element.nextElementSibling;
+            const toggle = element.querySelector('.faq-toggle');
+
+            question.classList.toggle('active');
+            answer.classList.toggle('active');
+        }
+
+        function toggleSystemCard() {
+            const imageDiv = document.getElementById('systemCardImage');
+            const button = document.querySelector('.system-card-button');
+            const currentLang = window.currentLanguage || 'en';
+
+            if (imageDiv.classList.contains('show')) {
+                imageDiv.classList.remove('show');
+                button.textContent = translations[currentLang]['faq-view-card'];
+            } else {
+                // Set the correct image based on language
+                const img = imageDiv.querySelector('img');
+                if (currentLang === 'en') {
+                    img.src = 'System card viewer - ENG.png';
+                    img.alt = 'System card in English';
+                } else {
+                    img.src = 'System card viewer - NL.png';
+                    img.alt = 'Systeemkaart in het Nederlands';
+                }
+                imageDiv.classList.add('show');
+                button.textContent = 'Hide Card';
+            }
+        }
+
         // Translation data
         const translations = {
             en: {
@@ -316,7 +356,21 @@
                 'privacy-complaints-title': '14. Complaints',
                 'privacy-complaints-text': 'If you have concerns about how we handle your personal data, you have the right to lodge a complaint with the Dutch Data Protection Authority (Autoriteit Persoonsgegevens) or your local supervisory authority.',
                 'privacy-contact-title': 'Contact Us',
-                'privacy-contact-text': 'If you have any questions about this privacy policy or our data practices, please contact us:'
+                'privacy-contact-text': 'If you have any questions about this privacy policy or our data practices, please contact us:',
+                'footer-faq': 'FAQ',
+                'faq-title': 'Frequently Asked Questions',
+                'faq-q1': 'What system does your robot play?',
+                'faq-a1': 'It plays 5 card major according to the standard of the Dutch Bridge Association (NBB) - club player. See card below.',
+                'faq-q2': 'Is the app free?',
+                'faq-a2': 'Yes, the app is free. We will - at some point - convert to a freemium model (app development and hosting isn\'t free 😊)',
+                'faq-q3': 'How can I delete my account?',
+                'faq-a3': 'You can request account deletion through our ',
+                'faq-a3-link': 'account deletion page',
+                'faq-q4': 'I cannot find the confirmation email',
+                'faq-a4': 'It is likely in your SPAM box. If that\'s not the case, contact us directly.',
+                'faq-q5': 'How do I report a bug?',
+                'faq-a5': 'Use the report bug button on the top left of your app screen. For other feedback: please contact us directly.',
+                'faq-view-card': 'View System Card'
             },
             nl: {
                 'nav-home': 'Home',
@@ -389,7 +443,21 @@
                 'privacy-complaints-title': '14. Klachten',
                 'privacy-complaints-text': 'Als u zorgen heeft over hoe wij uw persoonsgegevens behandelen, heeft u het recht om een klacht in te dienen bij de Autoriteit Persoonsgegevens of uw lokale toezichthoudende autoriteit.',
                 'privacy-contact-title': 'Contact',
-                'privacy-contact-text': 'Als u vragen heeft over dit privacybeleid of onze gegevenspraktijken, neem dan contact met ons op:'
+                'privacy-contact-text': 'Als u vragen heeft over dit privacybeleid of onze gegevenspraktijken, neem dan contact met ons op:',
+                'footer-faq': 'FAQ',
+                'faq-title': 'Veelgestelde Vragen',
+                'faq-q1': 'Welk systeem speelt jullie robot?',
+                'faq-a1': 'Het speelt 5-kaart hoog volgens de standaard van de Nederlandse Bridge Bond (NBB) - club speler. Zie kaart hieronder.',
+                'faq-q2': 'Is de app gratis?',
+                'faq-a2': 'Ja, de app is gratis. We zullen - op een gegeven moment - overgaan naar een freemium model (app ontwikkeling en hosting is niet gratis 😊)',
+                'faq-q3': 'Hoe kan ik mijn account verwijderen?',
+                'faq-a3': 'Je kunt accountverwijdering aanvragen via onze ',
+                'faq-a3-link': 'account verwijderingspagina',
+                'faq-q4': 'Ik kan de bevestigingsmail niet vinden',
+                'faq-a4': 'Het zit waarschijnlijk in je SPAM box. Als dat niet het geval is, neem dan direct contact met ons op.',
+                'faq-q5': 'Hoe meld ik een bug?',
+                'faq-a5': 'Gebruik de "meld bug" knop linksboven in je app scherm. Voor andere feedback: neem direct contact met ons op.',
+                'faq-view-card': 'Bekijk Systeemkaart'
             }
         };
     </script>
@@ -749,7 +817,7 @@
 
         .app-feature h3 {
             font-family: 'Poppins', sans-serif;
-            font-size: 18px;
+            font-size: 17px;
             color: #0808D9;
             margin-bottom: 3px;
             font-weight: 700;
@@ -769,7 +837,7 @@
         .app-feature p {
             color: #000;
             line-height: 1.6;
-            font-size: 15px;
+            font-size: 15.5px;
             margin: 0;
             text-align: left;
         }
@@ -1305,6 +1373,148 @@
             font-size: 14px;
         }
 
+        /* FAQ Page Styles */
+        #faq {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .faq-container {
+            background: #fff;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .faq-title {
+            font-family: 'Merriweather', serif;
+            font-size: 48px;
+            color: #0808D9;
+            margin-bottom: 20px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: #0808D9;
+            box-shadow: 0 4px 12px rgba(8, 8, 217, 0.1);
+        }
+
+        .faq-question {
+            padding: 20px 25px;
+            background: #f8f9fa;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #0808D9;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #f0f4f8;
+        }
+
+        .faq-question.active {
+            background: #0808D9;
+            color: #fff;
+        }
+
+        .faq-toggle {
+            font-size: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+
+        .faq-answer.active {
+            padding: 25px;
+            max-height: 1000px;
+        }
+
+        .faq-answer p {
+            color: #000;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .faq-answer a {
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .faq-answer a:hover {
+            color: #0808D9;
+        }
+
+        .system-card-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .system-card-button {
+            background: #0808D9;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 0;
+        }
+
+        .system-card-button:hover {
+            background: #ff6b6b;
+            transform: translateY(-2px);
+        }
+
+        .system-card-image {
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+
+        .system-card-image.show {
+            display: block;
+        }
+
+        .system-card-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             /* Hide logo image on mobile, show only text */
@@ -1398,7 +1608,7 @@
                 height: 150px;
             }
 
-            #about, #privacy {
+            #about, #privacy, #faq {
                 padding: 20px 15px;
             }
 
@@ -1407,12 +1617,21 @@
                 gap: 20px;
             }
 
-            .about-container, .privacy-container {
+            .about-container, .privacy-container, .faq-container {
                 padding: 30px 20px;
             }
 
-            .about-title, .privacy-title {
+            .about-title, .privacy-title, .faq-title {
                 font-size: 32px;
+            }
+
+            .faq-question {
+                font-size: 16px;
+                padding: 15px 20px;
+            }
+
+            .faq-answer.active {
+                padding: 20px;
             }
 
             .about-content {
@@ -1501,7 +1720,7 @@
                 font-size: 28px;
             }
 
-            .about-title, .privacy-title {
+            .about-title, .privacy-title, .faq-title {
                 font-size: 28px;
             }
 
@@ -1642,6 +1861,7 @@
                 <div class="footer-links">
                     <a href="#" onclick="showPage('privacy'); return false;" data-i18n="footer-privacy">Privacy Policy</a>
                     <a href="#" onclick="showPage('about'); return false;" data-i18n="footer-about">About Us</a>
+                    <a href="#" onclick="showPage('faq'); return false;" data-i18n="footer-faq">FAQ</a>
                     <a href="mailto:christiaan.tersteeg@redoublet.com" data-i18n="footer-contact">Contact</a>
                 </div>
                 <div class="footer-copyright">
@@ -1890,6 +2110,74 @@
                         <a href="mailto:christiaan.tersteeg@redoublet.com">christiaan.tersteeg@redoublet.com</a><br>
                         <a href="mailto:quirinus.tersteeg@redoublet.com">quirinus.tersteeg@redoublet.com</a>
                     </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Page -->
+        <section id="faq">
+            <div class="faq-container">
+                <div class="faq-header">
+                    <h1 class="faq-title" data-i18n="faq-title">Frequently Asked Questions</h1>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span data-i18n="faq-q1">What system does your robot play?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-i18n="faq-a1">It plays 5 card major according to the standard of the Dutch Bridge Association (NBB) - club player. See card below.</p>
+                        <div class="system-card-section">
+                            <button class="system-card-button" onclick="toggleSystemCard()" data-i18n="faq-view-card">View System Card</button>
+                            <div id="systemCardImage" class="system-card-image">
+                                <img src="System card viewer - ENG.png" alt="System card" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span data-i18n="faq-q2">Is the app free?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-i18n="faq-a2">Yes, the app is free. We will - at some point - convert to a freemium model (app development and hosting isn't free :))</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span data-i18n="faq-q3">How can I delete my account?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>
+                            <span data-i18n="faq-a3">You can request account deletion through our </span>
+                            <a href="delete-account.html" data-i18n="faq-a3-link">account deletion page</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span data-i18n="faq-q4">I cannot find the confirmation email</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-i18n="faq-a4">It is likely in your SPAM box. If that's not the case, contact us directly.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span data-i18n="faq-q5">How do I report a bug?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-i18n="faq-a5">Use the report bug button on the top left of your app screen. For other feedback: please contact us directly.</p>
+                    </div>
                 </div>
             </div>
         </section>

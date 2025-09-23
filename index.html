@@ -120,7 +120,12 @@
             elements.forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 if (translations && translations[window.currentLanguage] && translations[window.currentLanguage][key]) {
-                    element.textContent = translations[window.currentLanguage][key];
+                    // Use innerHTML for feature text that contains HTML
+                    if (key.includes('feature-1-text') || key.includes('feature-2-text')) {
+                        element.innerHTML = translations[window.currentLanguage][key];
+                    } else {
+                        element.textContent = translations[window.currentLanguage][key];
+                    }
                 }
             });
         }
@@ -248,10 +253,10 @@
                 'about-app-title': 'About the app',
                 'feature-1-title': 'Analyse game',
                 'feature-1-subtitle': 'Improve your bridge game',
-                'feature-1-text': 'Take pictures of all 4 hands. Enter the board details and you get the optimum play from a double dummy perspective (all hands open). You can also ask advice from our robot which will show both the bidding and the play.',
+                'feature-1-text': '<ul style="list-style: disc; padding-left: 20px; margin: 0; text-align: left;"><li>Take pictures of all four hands and enter board details</li><li>Get the optimum play from double dummy perspective (DDS)</li><li>Ask our robot for advice on bidding and play</li></ul>',
                 'feature-2-title': 'Score tracker',
                 'feature-2-subtitle': 'Turn every rubber game into a duplicate',
-                'feature-2-text': 'You take pictures of all hands and you select which benchmark to use, DDS or Robot. Then you enter your own score and the delta (IMP) is calculated. Keep track of all the boards you play.',
+                'feature-2-text': '<ul style="list-style: disc; padding-left: 20px; margin: 0; text-align: left;"><li>Take pictures of all four hands and enter board details</li><li>Select your benchmark: DDS or robot</li><li>Enter your own score and delta is calculated</li><li>Scoring is kept for all your boards</li></ul>',
                 'beta-title': 'BETA testers wanted!',
                 'beta-button': 'Become a Tester',
                 'modal-title': 'Join Our Beta Program',
@@ -321,10 +326,10 @@
                 'about-app-title': 'Over de app',
                 'feature-1-title': 'Analyseer spel',
                 'feature-1-subtitle': 'Verbeter je bridgespel',
-                'feature-1-text': 'Maak foto\'s van alle 4 handen. Voer de spelgegevens in en je krijgt het optimale spel vanuit een double dummy perspectief (alle handen open). Je kunt ook advies vragen aan onze robot.',
+                'feature-1-text': '<ul style="list-style: disc; padding-left: 20px; margin: 0; text-align: left;"><li>Maak foto\'s van de vier handen</li><li>Zie het optimale spel vanuit double dummy perspectief (handen open)</li><li>Vraag advies aan onze robot over bieden en spelen</li></ul>',
                 'feature-2-title': 'Scorebriefje',
                 'feature-2-subtitle': 'Geen koffertjes of scoretabellen meer nodig',
-                'feature-2-text': 'Je maakt foto\'s van alle handen en je selecteert de benchmark: DDS of Robot. Vervolgens voer je je eigen score in en wordt het verschil (Butler/IMP) berekend. Houdt de score bij voor alle spellen die je speelt.',
+                'feature-2-text': '<ul style="list-style: disc; padding-left: 20px; margin: 0; text-align: left;"><li>Maak foto\'s van de vier handen</li><li>Selecteer je benchmark: DDS of robot</li><li>Voer je eigen score in en verschil wordt berekend in IMP (butler)</li><li>De score van alle gespeelde spellen wordt bijgehouden</li></ul>',
                 'beta-title': 'BETA testers gezocht!',
                 'beta-button': 'Word een Tester',
                 'modal-title': 'Schrijf je in als Tester',
@@ -696,7 +701,7 @@
         .about-app-box {
             background: #fff;
             border-radius: 20px;
-            padding: 30px;
+            padding: 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             flex-shrink: 0;
         }
@@ -705,21 +710,21 @@
             font-family: 'Merriweather', serif;
             font-size: 32px;
             color: #0808D9;
-            margin-bottom: 5px;
-            text-align: center;
+            margin-bottom: 15px;
+            text-align: left;
         }
 
         .app-features {
             display: flex;
             flex-direction: column;
-            gap: 18px;
+            gap: 12px;
         }
 
         .app-feature {
             display: flex;
-            gap: 20px;
+            gap: 12px;
             align-items: flex-start;
-            padding: 20px;
+            padding: 15px;
             background: #f8f9fa;
             border-radius: 12px;
             transition: all 0.3s ease;
@@ -731,44 +736,49 @@
         }
 
         .feature-icon {
-            min-width: 40px;
-            height: 40px;
+            min-width: 25px;
+            height: 25px;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
-            font-size: 28px;
+            font-size: 20px;
             flex-shrink: 0;
+            margin-left: -5px;
+            padding-top: 2px;
         }
 
         .app-feature h3 {
             font-family: 'Poppins', sans-serif;
-            font-size: 20px;
+            font-size: 18px;
             color: #0808D9;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             font-weight: 700;
+            text-align: left;
         }
 
         .feature-subtitle {
             font-family: 'Poppins', sans-serif;
-            font-size: 16px;
+            font-size: 17px;
             color: #0808D9;
             margin-bottom: 8px;
             font-weight: 400;
             font-style: normal;
+            text-align: left;
         }
 
         .app-feature p {
             color: #000;
             line-height: 1.6;
-            font-size: 14px;
+            font-size: 15px;
             margin: 0;
+            text-align: left;
         }
 
         /* Beta Box Styles */
         .beta-box {
             background: #fff;
             border-radius: 20px;
-            padding: 40px 40px;
+            padding: 30px 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             position: relative;
             overflow: hidden;
@@ -798,7 +808,7 @@
             font-family: 'Merriweather', serif;
             font-size: 32px;
             color: #0808D9;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             animation: fadeInUp 1s ease;
         }
 
@@ -1588,7 +1598,7 @@
                             </div>
                         </div>
                         <div class="app-feature">
-                            <div class="feature-icon">📊</div>
+                            <div class="feature-icon">📋</div>
                             <div>
                                 <h3 data-i18n="feature-2-title">Score tracker</h3>
                                 <h4 class="feature-subtitle" data-i18n="feature-2-subtitle">Turn every rubber game into a duplicate</h4>

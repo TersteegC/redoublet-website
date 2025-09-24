@@ -269,13 +269,14 @@
                 imageDiv.classList.remove('show');
                 button.textContent = translations[currentLang]['faq-view-card'];
             } else {
-                // Set the correct image based on language
+                // Set the correct image based on language with cache busting
                 const img = imageDiv.querySelector('img');
+                const timestamp = new Date().getTime();
                 if (currentLang === 'en') {
-                    img.src = 'System card viewer - ENG.png';
+                    img.src = 'System card viewer - ENG.png?v=' + timestamp;
                     img.alt = 'System card in English';
                 } else {
-                    img.src = 'System card viewer - NL.png';
+                    img.src = 'System card viewer - NL.png?v=' + timestamp;
                     img.alt = 'Systeemkaart in het Nederlands';
                 }
                 imageDiv.classList.add('show');
@@ -315,7 +316,7 @@
                 'contact-subtitle': 'We\'d love to hear from you!',
                 'contact-label': 'Contact:',
                 'submit-sending': 'Sending...',
-                'success-message': 'Thank you for signing up! Check your email for confirmation.',
+                'success-message': 'Thank you for signing up! We will reach out to you over the next couple of days with instructions on the app testing.',
                 'error-message': 'There was an error connecting to our server. Please try again or email us directly at christiaan.tersteeg@redoublet.com',
                 'lang-english': 'English',
                 'lang-dutch': 'Nederlands',
